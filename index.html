@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Penzion Březiny – Kateřinice</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --forest: #1e2d1f; --forest-mid: #2e4530; --forest-light: #3d5c40;
+      --gold: #b8964a; --gold-light: #d4b06a;
+      --cream: #f5f0e8; --cream-dark: #ede5d4; --stone: #8a7f6e; --white: #fdfcf8;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Jost', sans-serif; background: var(--white); color: var(--forest); overflow-x: hidden; }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 24px 60px; transition: background .4s, padding .4s;
+    }
+    nav.scrolled { background: rgba(30,45,31,.97); backdrop-filter: blur(12px); padding: 16px 60px; }
+    .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 300; color: var(--white); letter-spacing: .08em; text-decoration: none; }
+    .nav-logo span { color: var(--gold); }
+    .nav-links { display: flex; gap: 40px; list-style: none; }
+    .nav-links a { color: rgba(255,255,255,.82); text-decoration: none; font-size: .78rem; letter-spacing: .14em; text-transform: uppercase; font-weight: 400; transition: color .3s; }
+    .nav-links a:hover { color: var(--gold-light); }
+    .nav-cta { border: 1px solid var(--gold); color: var(--gold) !important; padding: 10px 24px; transition: background .3s, color .3s !important; }
+    .nav-cta:hover { background: var(--gold); color: var(--forest) !important; }
+
+    #hero {
+      position: relative; height: 100vh; min-height: 700px;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 0 60px 100px; overflow: hidden;
+    }
+    .hero-bg { position: absolute; inset: 0; background: url("img/hero.jpg") center center/cover no-repeat; background-color: #1e2d1f; }
+    .hero-bg::before { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,.55) 0%, rgba(0,0,0,.25) 50%, rgba(0,0,0,.1) 100%); z-index: 1; }
+    .hero-bg::after { content: ''; position: absolute; inset: 0; background-image: radial-gradient(ellipse 80% 50% at 70% 40%, rgba(184,150,74,.12) 0%, transparent 60%), radial-gradient(ellipse 50% 80% at 20% 70%, rgba(30,45,31,.6) 0%, transparent 60%); }
+    .hero-noise { position: absolute; inset: 0; opacity: .04; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); background-size: 200px 200px; }
+    .hero-line { position: absolute; top: 0; left: 60px; width: 1px; height: 100%; background: linear-gradient(to bottom, transparent, rgba(184,150,74,.4), transparent); }
+
+    .hero-tag { position: relative; font-size: .72rem; letter-spacing: .22em; text-transform: uppercase; color: var(--gold); margin-bottom: 28px; display: flex; align-items: center; gap: 16px; }
+    .hero-tag::before { content: ''; width: 40px; height: 1px; background: var(--gold); }
+    h1 { position: relative; font-family: 'Cormorant Garamond', serif; font-size: clamp(3.5rem, 7vw, 7rem); font-weight: 300; line-height: 1; color: var(--white); letter-spacing: -.01em; max-width: 700px; margin-bottom: 32px; }
+    h1 em { font-style: italic; color: var(--gold-light); }
+    .hero-sub { position: relative; font-size: 1rem; font-weight: 300; color: rgba(255,255,255,.7); max-width: 480px; line-height: 1.75; margin-bottom: 48px; }
+    .hero-btns { position: relative; display: flex; gap: 20px; flex-wrap: wrap; }
+    .btn-primary { background: var(--gold); color: var(--forest); text-decoration: none; padding: 16px 40px; font-size: .8rem; letter-spacing: .14em; text-transform: uppercase; font-weight: 500; transition: background .3s, transform .2s; display: inline-block; }
+    .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+    .btn-outline { border: 1px solid rgba(255,255,255,.4); color: var(--white); text-decoration: none; padding: 16px 40px; font-size: .8rem; letter-spacing: .14em; text-transform: uppercase; font-weight: 400; transition: border-color .3s, background .3s; display: inline-block; }
+    .btn-outline:hover { border-color: var(--white); background: rgba(255,255,255,.06); }
+    .hero-scroll { position: absolute; bottom: 40px; right: 60px; display: flex; flex-direction: column; align-items: center; gap: 10px; color: rgba(255,255,255,.4); font-size: .68rem; letter-spacing: .2em; text-transform: uppercase; }
+    .hero-scroll-line { width: 1px; height: 60px; background: linear-gradient(to bottom, rgba(255,255,255,.4), transparent); animation: scrollLine 2s ease-in-out infinite; }
+    @keyframes scrollLine { 0%,100%{transform:scaleY(1);opacity:1} 50%{transform:scaleY(.5);opacity:.4} }
+
+    .section-tag { font-size: .68rem; letter-spacing: .22em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; display: flex; align-items: center; gap: 14px; }
+    .section-tag::before { content:''; width:32px; height:1px; background:var(--gold); }
+    h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.4rem, 4vw, 3.6rem); font-weight: 300; line-height: 1.1; color: var(--forest); letter-spacing: -.01em; }
+    h2 em { font-style: italic; color: var(--forest-light); }
+    .lead { font-size: 1rem; font-weight: 300; color: var(--stone); line-height: 1.8; max-width: 560px; }
+
+    /* INTRO */
+    #intro { background: var(--cream); display: grid; grid-template-columns: 1fr 1fr; min-height: 70vh; }
+    .intro-text { padding: 100px 80px 100px 100px; display: flex; flex-direction: column; justify-content: center; gap: 28px; }
+    .intro-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--cream-dark); margin-top: 12px; }
+    .stat { background: var(--cream); padding: 28px 32px; }
+    .stat-num { font-family: 'Cormorant Garamond', serif; font-size: 2.8rem; font-weight: 300; color: var(--forest); line-height: 1; }
+    .stat-num span { font-size: 1.2rem; color: var(--gold); margin-left: 2px; }
+    .stat-label { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; color: var(--stone); margin-top: 6px; }
+    .intro-visual { position: relative; overflow: hidden; background: var(--forest-mid); }
+    .intro-visual-inner { position: absolute; inset: 0; background: url("img/exterior-vana.jpg") center center/cover no-repeat; background-color: #2e4530; display: flex; align-items: center; justify-content: center; }
+    .intro-visual-inner svg { opacity: .08; width: 60%; }
+    .intro-quote { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 60px; text-align: center; }
+    .intro-quote blockquote { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 300; font-style: italic; color: var(--white); line-height: 1.5; margin-bottom: 24px; }
+    .intro-quote cite { font-size: .72rem; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); font-style: normal; }
+    .intro-ornament { width: 1px; height: 60px; background: linear-gradient(to bottom, transparent, var(--gold), transparent); margin: 0 auto 24px; }
+
+    /* APARTMENTS */
+    #apartments { background: var(--white); padding: 120px 0; }
+    .apartments-header { padding: 0 100px; display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 80px; }
+    .apartments-header .lead { text-align: right; max-width: 320px; }
+    .apt-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; background: var(--cream-dark); margin: 0 100px; }
+    .apt-card { background: var(--white); overflow: hidden; }
+    .apt-visual { height: 360px; position: relative; overflow: hidden; }
+    .apt-jaguar-bg { position: absolute; inset: 0; background: url("img/jaguar-obyvak.jpg") center center/cover no-repeat; }
+    .apt-onyx-bg { position: absolute; inset: 0; background: url("img/onyx-koupelna.jpg") center center/cover no-repeat; }
+    .apt-visual-label { position: absolute; top: 32px; left: 36px; font-family: 'Cormorant Garamond', serif; font-size: 4rem; font-weight: 300; color: rgba(255,255,255,.12); letter-spacing: -.02em; line-height: 1; }
+    .apt-badge-row { position: absolute; bottom: 24px; left: 36px; display: flex; gap: 8px; flex-wrap: wrap; }
+    .badge { background: rgba(255,255,255,.1); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,.15); color: rgba(255,255,255,.85); font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; padding: 6px 14px; }
+    .apt-body { padding: 48px 48px 56px; }
+    .apt-name { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 300; color: var(--forest); margin-bottom: 16px; }
+    .apt-desc { font-size: .92rem; font-weight: 300; color: var(--stone); line-height: 1.8; margin-bottom: 32px; }
+    .apt-features { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 10px 24px; margin-bottom: 40px; }
+    .apt-features li { font-size: .78rem; letter-spacing: .06em; text-transform: uppercase; color: var(--forest); font-weight: 400; display: flex; align-items: center; gap: 10px; }
+    .apt-features li::before { content:''; width:20px; height:1px; background:var(--gold); }
+    .apt-link { font-size: .75rem; letter-spacing: .16em; text-transform: uppercase; color: var(--gold); text-decoration: none; display: flex; align-items: center; gap: 12px; transition: gap .3s; }
+    .apt-link::after { content:'→'; }
+    .apt-link:hover { gap: 20px; }
+
+    /* WELLNESS */
+    #wellness { background: var(--forest); overflow: hidden; display: grid; grid-template-columns: 1fr 1fr; min-height: 80vh; }
+    .wellness-text { padding: 120px 80px 120px 100px; display: flex; flex-direction: column; justify-content: center; gap: 28px; }
+    .wellness-text h2 { color: var(--white); }
+    .wellness-text .section-tag { color: var(--gold); }
+    .wellness-text .lead { color: rgba(255,255,255,.65); }
+    .wellness-list { list-style: none; display: flex; flex-direction: column; gap: 20px; margin-top: 8px; }
+    .wellness-list li { display: flex; align-items: flex-start; gap: 20px; color: rgba(255,255,255,.75); font-size: .9rem; font-weight: 300; line-height: 1.65; }
+    .wellness-icon { width: 36px; height: 36px; flex-shrink: 0; border: 1px solid rgba(184,150,74,.4); display: flex; align-items: center; justify-content: center; color: var(--gold); font-size: .9rem; }
+    .wellness-icon-title { font-weight: 500; color: var(--white); display: block; margin-bottom: 4px; font-size: .88rem; letter-spacing: .04em; }
+    .wellness-more-link { font-size: .75rem; letter-spacing: .16em; text-transform: uppercase; color: var(--gold); text-decoration: none; display: inline-flex; align-items: center; gap: 10px; margin-top: 8px; transition: gap .3s; }
+    .wellness-more-link:hover { gap: 18px; }
+    .wellness-visual { position: relative; background: var(--forest-mid); }
+    .wellness-visual-inner { position: absolute; inset: 0; background: url("img/vana-zapad.jpg") center center/cover no-repeat; background-color: #1e2d1f; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 80px; gap: 40px; }
+    .wellness-visual-inner::before { content: ""; position: absolute; inset: 0; background: rgba(20,35,20,.45); }
+    .wellness-ring { width: 280px; height: 280px; border-radius: 50%; border: 1px solid rgba(184,150,74,.25); display: flex; align-items: center; justify-content: center; position: relative; }
+    .wellness-ring::before { content:''; position:absolute; inset:20px; border-radius:50%; border:1px solid rgba(184,150,74,.15); }
+    .wellness-ring-text { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-style: italic; color: rgba(255,255,255,.6); text-align: center; line-height: 1.6; padding: 40px; }
+    .wellness-cta-link { border: 1px solid rgba(184,150,74,.4); color: var(--gold); text-decoration: none; padding: 12px 28px; font-size: .72rem; letter-spacing: .16em; text-transform: uppercase; transition: background .3s, border-color .3s; }
+    .wellness-cta-link:hover { background: rgba(184,150,74,.1); border-color: var(--gold); }
+
+    /* GALLERY */
+    #gallery { background: var(--cream); padding: 120px 100px; }
+    .gallery-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 60px; }
+    .gallery-header .lead { text-align: right; max-width: 280px; }
+    .gallery-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; grid-template-rows: 280px 280px; gap: 4px; }
+    .gallery-item { position: relative; overflow: hidden; }
+    .gallery-item:first-child { grid-row: span 2; }
+    .gallery-item-inner { position: absolute; inset: 0; transition: transform .6s ease; }
+    .gallery-item:hover .gallery-item-inner { transform: scale(1.04); }
+    .g1 { background-color: #2a4030; background: url("img/exterior.jpg") center center/cover no-repeat; }
+    .g2 { background-color: #1e2e20; background: url("img/vana-zapad2.jpg") center center/cover no-repeat; }
+    .g3 { background-color: #243028; background: url("img/jaguar-koupelna.jpg") center center/cover no-repeat; }
+    .g4 { background-color: #1a2820; background: url("img/onyx-obyvak.jpg") center center/cover no-repeat; }
+    .g5 { background-color: #202e22; background: url("img/priroda-louka.jpg") center center/cover no-repeat; }
+    .gallery-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(30,45,31,.6) 0%, transparent 50%); opacity: 0; transition: opacity .4s; display: flex; align-items: flex-end; padding: 24px; }
+    .gallery-item:hover .gallery-overlay { opacity: 1; }
+    .gallery-caption { font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.85); }
+    .g1::after,.g2::after,.g3::after,.g4::after,.g5::after { content:''; position:absolute; inset:0; opacity:.15; }
+    .g1::after { background:radial-gradient(circle at 60% 40%, rgba(184,150,74,.6) 0%, transparent 60%); }
+    .g2::after { background:radial-gradient(circle at 40% 60%, rgba(255,255,255,.3) 0%, transparent 50%); }
+    .g3::after { background:radial-gradient(circle at 50% 50%, rgba(184,150,74,.4) 0%, transparent 60%); }
+    .g4::after { background:radial-gradient(circle at 30% 40%, rgba(255,255,255,.2) 0%, transparent 50%); }
+    .g5::after { background:radial-gradient(circle at 70% 50%, rgba(184,150,74,.3) 0%, transparent 60%); }
+
+    /* REVIEWS */
+    #reviews { background: var(--white); padding: 120px 100px; }
+    .reviews-header { text-align: center; margin-bottom: 80px; }
+    .reviews-header .section-tag { justify-content: center; }
+    .reviews-header .section-tag::before { display: none; }
+    .reviews-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; background: var(--cream-dark); }
+    .review-card { background: var(--white); padding: 52px 44px; }
+    .review-stars { display: flex; gap: 4px; margin-bottom: 20px; }
+    .star { width: 12px; height: 12px; background: var(--gold); clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%); }
+    .review-text { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-style: italic; font-weight: 300; color: var(--forest); line-height: 1.7; margin-bottom: 28px; }
+    .review-author { display: flex; align-items: center; gap: 14px; }
+    .review-avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--cream-dark); display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-size: 1rem; color: var(--gold); }
+    .review-name { font-size: .8rem; font-weight: 500; color: var(--forest); letter-spacing: .04em; }
+    .review-source { font-size: .7rem; color: var(--stone); margin-top: 2px; }
+
+    /* CONTACT */
+    #contact { background: var(--forest); display: grid; grid-template-columns: 1fr 1fr; }
+    .contact-text { padding: 120px 80px 120px 100px; display: flex; flex-direction: column; justify-content: center; gap: 32px; }
+    .contact-text h2 { color: var(--white); }
+    .contact-text .section-tag { color: var(--gold); }
+    .contact-text .lead { color: rgba(255,255,255,.65); max-width: 420px; }
+    .contact-items { display: flex; flex-direction: column; gap: 24px; }
+    .contact-item { display: flex; align-items: flex-start; gap: 20px; }
+    .contact-item-icon { width: 42px; height: 42px; flex-shrink: 0; border: 1px solid rgba(184,150,74,.35); display: flex; align-items: center; justify-content: center; color: var(--gold); font-size: 1rem; }
+    .contact-item-label { font-size: .65rem; letter-spacing: .16em; text-transform: uppercase; color: var(--gold); margin-bottom: 4px; }
+    .contact-item-value { font-size: 1rem; font-weight: 300; color: var(--white); text-decoration: none; transition: color .3s; }
+    .contact-item-value:hover { color: var(--gold-light); }
+    .contact-map { background: var(--forest-mid); position: relative; overflow: hidden; min-height: 500px; }
+    .map-placeholder { position: absolute; inset: 0; background: linear-gradient(160deg, #1a2e1a 0%, #253c26 60%, #1e3020 100%); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 24px; padding: 60px; }
+    .map-pin { width: 60px; height: 60px; border: 2px solid rgba(184,150,74,.4); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; }
+    .map-name { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 300; color: var(--white); text-align: center; }
+    .map-addr { font-size: .85rem; color: rgba(255,255,255,.5); letter-spacing: .06em; text-align: center; line-height: 1.7; }
+    .map-link { border: 1px solid rgba(184,150,74,.4); color: var(--gold); text-decoration: none; padding: 12px 28px; font-size: .72rem; letter-spacing: .16em; text-transform: uppercase; transition: background .3s, border-color .3s; margin-top: 16px; }
+    .map-link:hover { background: rgba(184,150,74,.1); border-color: var(--gold); }
+
+    footer { background: #141e14; padding: 60px 100px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(184,150,74,.12); flex-wrap: wrap; gap: 20px; }
+    .footer-brand { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 300; color: var(--white); letter-spacing: .06em; }
+    .footer-brand span { color: var(--gold); }
+    .footer-copy { font-size: .7rem; letter-spacing: .1em; color: rgba(255,255,255,.3); }
+    .footer-links { display: flex; gap: 28px; }
+    .footer-links a { font-size: .7rem; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.35); text-decoration: none; transition: color .3s; }
+    .footer-links a:hover { color: var(--gold); }
+
+    .fade-up { opacity: 0; transform: translateY(30px); transition: opacity .7s ease, transform .7s ease; }
+    .fade-up.visible { opacity: 1; transform: none; }
+
+    @media (max-width: 1100px) {
+      nav, nav.scrolled { padding: 18px 40px; }
+      #hero { padding: 0 40px 80px; }
+      .intro-text { padding: 80px 60px; }
+      .apartments-header, .apt-grid { margin: 0 60px; }
+      #gallery { padding: 100px 60px; }
+      #reviews { padding: 100px 60px; }
+      .contact-text { padding: 80px 60px; }
+      footer { padding: 50px 60px; }
+    }
+    @media (max-width: 900px) {
+      nav, nav.scrolled { padding: 18px 28px; }
+      .nav-links { display: none; }
+      #hero { padding: 0 28px 60px; }
+      #intro { grid-template-columns: 1fr; }
+      .intro-text { padding: 80px 40px; }
+      .intro-visual { min-height: 400px; }
+      #apartments { padding: 80px 0; }
+      .apartments-header { flex-direction: column; align-items: flex-start; gap: 16px; padding: 0 40px; margin: 0 0 48px; }
+      .apartments-header .lead { text-align: left; }
+      .apt-grid { grid-template-columns: 1fr; margin: 0 40px; }
+      #wellness { grid-template-columns: 1fr; }
+      .wellness-text { padding: 80px 40px; }
+      .wellness-visual { min-height: 400px; }
+      #gallery { padding: 80px 40px; }
+      .gallery-header { flex-direction: column; align-items: flex-start; gap: 16px; }
+      .gallery-header .lead { text-align: left; }
+      .gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+      .gallery-item:first-child { grid-row: span 1; }
+      .reviews-grid { grid-template-columns: 1fr; }
+      #reviews { padding: 80px 40px; }
+      #contact { grid-template-columns: 1fr; }
+      .contact-text { padding: 80px 40px; }
+      footer { flex-direction: column; gap: 20px; padding: 40px; text-align: center; }
+      .footer-links { flex-wrap: wrap; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav id="navbar">
+    <a href="index.html" class="nav-logo">Penzion <span>Březiny</span></a>
+    <ul class="nav-links">
+      <li><a href="#intro">O nás</a></li>
+      <li><a href="apartmany.html">Apartmány</a></li>
+      <li><a href="wellness.html">Wellness</a></li>
+      <li><a href="vylety.html">Výlety a okolí</a></li>
+      <li><a href="kontakt.html" class="nav-cta">Rezervace</a></li>
+    </ul>
+  </nav>
+
+  <section id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-noise"></div>
+    <div class="hero-line"></div>
+    <p class="hero-tag">Kateřinice · Beskydy · Česká republika</p>
+    <h1>Klid na <em>okraji</em><br>lesa</h1>
+    <p class="hero-sub">Prémiové ubytování pro ty, kteří hledají absolutní soukromí, přírodu a dokonalý komfort – daleko od ruchu světa.</p>
+    <div class="hero-btns">
+      <a href="apartmany.html" class="btn-primary">Prohlédnout apartmány</a>
+      <a href="kontakt.html" class="btn-outline">Kontaktovat nás</a>
+    </div>
+    <div class="hero-scroll">
+      <div class="hero-scroll-line"></div>
+      Posunout
+    </div>
+  </section>
+
+  <section id="intro">
+    <div class="intro-text">
+      <div>
+        <p class="section-tag fade-up">Náš příběh</p>
+        <h2 class="fade-up">Místo, kde <em>čas plyne</em> jinak</h2>
+      </div>
+      <p class="lead fade-up">Nabízíme pronájem celé chaty pro větší skupiny nebo dvou oddělených, plně vybavených apartmánů na samém okraji lesa v Kateřinicích. Každý host si zaslouží klid, soukromí a péči přesně podle svých potřeb.</p>
+      <div class="intro-stats fade-up">
+        <div class="stat">
+          <div class="stat-num">2<span>×</span></div>
+          <div class="stat-label">Prémiové apartmány</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">10<span>+</span></div>
+          <div class="stat-label">Hostů najednou</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">5<span>★</span></div>
+          <div class="stat-label">Hodnocení hostů</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">∞</div>
+          <div class="stat-label">Metrů lesa před dveřmi</div>
+        </div>
+      </div>
+    </div>
+    <div class="intro-visual">
+      <div class="intro-visual-inner">
+        <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M100 10 L130 80 L200 80 L145 125 L165 195 L100 155 L35 195 L55 125 L0 80 L70 80 Z" stroke="white" stroke-width="1" fill="none"/>
+        </svg>
+      </div>
+      <div class="intro-quote">
+        <div class="intro-ornament"></div>
+        <blockquote>„Nádherné místo na konci světa, ale s veškerým luxusem."</blockquote>
+        <cite>Jana K. · Ověřená recenze</cite>
+      </div>
+    </div>
+  </section>
+
+  <section id="apartments">
+    <div class="apartments-header">
+      <div>
+        <p class="section-tag fade-up">Ubytování</p>
+        <h2 class="fade-up">Naše <em>apartmány</em></h2>
+      </div>
+      <p class="lead fade-up">Každý apartmán je navržen s důrazem na pohodlí, soukromí a blízkost přírody.</p>
+    </div>
+    <div class="apt-grid">
+      <div class="apt-card fade-up">
+        <div class="apt-visual">
+          <div class="apt-jaguar-bg"></div>
+          <div class="apt-visual-label">Jaguár</div>
+          <div class="apt-badge-row">
+            <span class="badge">Až 4 osoby</span>
+            <span class="badge">Terasa</span>
+            <span class="badge">Vaňová koupelna</span>
+          </div>
+        </div>
+        <div class="apt-body">
+          <h3 class="apt-name">Apartmán Jaguár</h3>
+          <p class="apt-desc">Prostorný a světlý apartmán v přízemí s přímým vstupem na soukromou terasu. Nabízí plně vybavenou kuchyň, pohodlné designové spaní a moderní koupelnu. Ideální volba pro páry nebo rodiny, kteří chtějí mít přírodu hned za dveřmi.</p>
+          <ul class="apt-features">
+            <li>Kapacita až 4 osoby</li>
+            <li>Vlastní kuchyně</li>
+            <li>Koupelna s vanou</li>
+            <li>Soukromá terasa</li>
+          </ul>
+          <a href="apartmany.html#jaguar" class="apt-link">Zobrazit detail</a>
+        </div>
+      </div>
+      <div class="apt-card fade-up">
+        <div class="apt-visual">
+          <div class="apt-onyx-bg"></div>
+          <div class="apt-visual-label">Onyx</div>
+          <div class="apt-badge-row">
+            <span class="badge">Až 6 osob</span>
+            <span class="badge">Výhled do zeleně</span>
+            <span class="badge">Podkroví</span>
+          </div>
+        </div>
+        <div class="apt-body">
+          <h3 class="apt-name">Apartmán Onyx</h3>
+          <p class="apt-desc">Vzdušný podkrovní prostor s neopakovatelným výhledem přímo do zeleně. Nabízí absolutní soukromí, vlastní kuchyňku a kouzelnou atmosféru. Ideální pro romantické pobyty nebo menší rodiny, které hledají útulný domov daleko od shonu.</p>
+          <ul class="apt-features">
+            <li>Kapacita až 6 osob</li>
+            <li>Útulný interiér</li>
+            <li>Krásný výhled</li>
+            <li>Samostatný vchod</li>
+          </ul>
+          <a href="apartmany.html#onyx" class="apt-link">Zobrazit detail</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="wellness">
+    <div class="wellness-text">
+      <p class="section-tag">Relaxace</p>
+      <h2>Privátní <em>wellness</em></h2>
+      <p class="lead">Po dni stráveném procházkami po valašských kopcích si vaše tělo zaslouží odměnu. Čas se tady řídí jen podle vás – bez fronty, bez cizích lidí.</p>
+      <ul class="wellness-list">
+        <li>
+          <div class="wellness-icon">♨</div>
+          <div>
+            <span class="wellness-icon-title">Horká vana pod hvězdami</span>
+            Ponořte se do horké vody a nechte starosti všedních dní rozplynout nad korunami stromů. Výhradně pro hosty penzionu.
+          </div>
+        </li>
+        <li>
+          <div class="wellness-icon">🧖</div>
+          <div>
+            <span class="wellness-icon-title">Privátní sauna</span>
+            Prohřejte se v sauně a vychutnejte si dokonalé soukromí. Žádné časové limity, žádní cizí lidé.
+          </div>
+        </li>
+        <li>
+          <div class="wellness-icon">🌲</div>
+          <div>
+            <span class="wellness-icon-title">Příroda na dosah</span>
+            Lesy, louky a beskydsá krajina přímo před dveřmi vašeho apartmánu – bez příplatku a bez omezení.
+          </div>
+        </li>
+      </ul>
+      <a href="wellness.html" class="wellness-more-link">Více o wellness →</a>
+    </div>
+    <div class="wellness-visual">
+      <div class="wellness-visual-inner">
+        <div class="wellness-ring">
+          <p class="wellness-ring-text">Čas se tady řídí<br>jen podle vás</p>
+        </div>
+        <a href="kontakt.html" class="wellness-cta-link">Rezervovat pobyt</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="gallery">
+    <div class="gallery-header">
+      <div>
+        <p class="section-tag fade-up">Galerie</p>
+        <h2 class="fade-up">Nahlédněte <em>dovnitř</em></h2>
+      </div>
+      <p class="lead fade-up">Detaily apartmánů a krásné okolí Kateřinic.</p>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <div class="gallery-item-inner g1"></div>
+        <div class="gallery-overlay"><span class="gallery-caption">Exteriér penzionu</span></div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-item-inner g2"></div>
+        <div class="gallery-overlay"><span class="gallery-caption">Horká vana</span></div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-item-inner g3"></div>
+        <div class="gallery-overlay"><span class="gallery-caption">Apartmán Jaguár</span></div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-item-inner g4"></div>
+        <div class="gallery-overlay"><span class="gallery-caption">Apartmán Onyx</span></div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-item-inner g5"></div>
+        <div class="gallery-overlay"><span class="gallery-caption">Výhled do přírody</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="reviews">
+    <div class="reviews-header">
+      <p class="section-tag">Reference</p>
+      <h2>Zkušenosti <em>našich hostů</em></h2>
+    </div>
+    <div class="reviews-grid">
+      <div class="review-card fade-up">
+        <div class="review-stars">
+          <div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div>
+        </div>
+        <p class="review-text">„Nádherné místo na konci světa, ale s veškerým luxusem. Apartmán byl perfektně čistý a majitelé neskutečně vstřícní. Wellness pod hvězdami bylo magické."</p>
+        <div class="review-author">
+          <div class="review-avatar">J</div>
+          <div>
+            <div class="review-name">Jana K.</div>
+            <div class="review-source">Ověřená recenze · 5.0</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-card fade-up">
+        <div class="review-stars">
+          <div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div>
+        </div>
+        <p class="review-text">„Úžasný víkend pro celou rodinu. Děti milovaly přírodu kolem, my si užili klid a soukromí. Určitě se vrátíme a doporučíme všem přátelům."</p>
+        <div class="review-author">
+          <div class="review-avatar">M</div>
+          <div>
+            <div class="review-name">Martin P.</div>
+            <div class="review-source">Ověřená recenze · 5.0</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-card fade-up">
+        <div class="review-stars">
+          <div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div>
+        </div>
+        <p class="review-text">„Romantický pobyt k narozeninám – dokonalý. Krásný výhled z Onyx apartmánu, útulná atmosféra a skvělá sauna. Přesně to, co jsme hledali."</p>
+        <div class="review-author">
+          <div class="review-avatar">L</div>
+          <div>
+            <div class="review-name">Lucie &amp; Tomáš</div>
+            <div class="review-source">Ověřená recenze · 5.0</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="contact-text">
+      <p class="section-tag">Rezervace</p>
+      <h2>Domluvte si <em>svůj pobyt</em></h2>
+      <p class="lead">Nepoužíváme neosobní rezervační systémy. Rádi s vámi komunikujeme přímo, abychom pro vás připravili pobyt přesně na míru. Zavolejte nám nebo vyplňte krátký formulář.</p>
+      <div class="contact-items">
+        <div class="contact-item">
+          <div class="contact-item-icon">📞</div>
+          <div>
+            <div class="contact-item-label">Telefon</div>
+            <a href="tel:+420603225970" class="contact-item-value">+420 603 225 970</a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">✉</div>
+          <div>
+            <div class="contact-item-label">E-mail</div>
+            <a href="/cdn-cgi/l/email-protection#0d64636b624d77786f646e6866236e77" class="contact-item-value"><span class="__cf_email__" data-cfemail="2d44434b426d57584f444e4846034e57">[email&#160;protected]</span></a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">📍</div>
+          <div>
+            <div class="contact-item-label">Adresa</div>
+            <span class="contact-item-value">Kateřinice 254, 756 21</span>
+          </div>
+        </div>
+      </div>
+      <a href="kontakt.html" class="btn-primary" style="align-self:flex-start;">Přejít na kontakt</a>
+    </div>
+    <div class="contact-map">
+      <div class="map-placeholder">
+        <div class="map-pin">📍</div>
+        <div class="map-name">Penzion Březiny</div>
+        <div class="map-addr">Kateřinice 254<br>756 21 Kateřinice<br>Česká republika</div>
+        <a href="https://maps.google.com/?q=Penzion+Breziny+Kateriniice" target="_blank" class="map-link">Otevřít v Google Maps</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-brand">Penzion <span>Březiny</span></div>
+    <div class="footer-copy">© 2026 Penzion Březiny · Všechna práva vyhrazena</div>
+    <div class="footer-links">
+      <a href="#">Ochrana osobních údajů</a>
+      <a href="#">Přístupnost</a>
+    </div>
+  </footer>
+
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    const nav = document.getElementById('navbar');
+    window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 60); });
+    const obs = new IntersectionObserver(entries => {
+      entries.f

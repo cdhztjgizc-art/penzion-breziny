@@ -211,7 +211,7 @@
         <div class="info-icon">✉</div>
         <div>
           <div class="info-label">E-mail</div>
-          <a href="mailto:info@zubicek.cz" class="info-value">info@zubicek.cz</a>
+          <a href="/cdn-cgi/l/email-protection#6b02050d042b111e0902080e00450811" class="info-value"><span class="__cf_email__" data-cfemail="8de4e3ebe2cdf7f8efe4eee8e6a3eef7">[email&#160;protected]</span></a>
         </div>
       </div>
       <div class="info-item">
@@ -352,7 +352,7 @@
   </div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   function submitForm() {
     const gdpr = document.getElementById('gdpr');
     const fname = document.getElementById('fname').value.trim();
@@ -386,8 +386,4 @@
     document.getElementById('checkout').min = this.value;
   });
 
-  const obs = new IntersectionObserver(e => e.forEach(el => { if(el.isIntersecting){el.target.classList.add('visible');obs.unobserve(el.target);} }), {threshold:.1});
-  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
-</script>
-</body>
-</html>
+  const obs = new Intersection
