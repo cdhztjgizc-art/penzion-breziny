@@ -37,15 +37,15 @@
     }
     .page-hero-bg {
       position: absolute; inset: 0;
-      background: url("img/exterior.jpg") center center/cover no-repeat;
+      background: url("img/exterior.jpg") center center/cover no-repeat; background-color: #1e2d1f;
     }
     .page-hero-bg::after {
       content: ''; position: absolute; inset: 0;
-      background: radial-gradient(ellipse 70% 60% at 60% 40%, rgba(184,150,74,.14) 0%, transparent 60%);
+      background: linear-gradient(to top, rgba(0,0,0,.75) 0%, rgba(0,0,0,.45) 60%, rgba(0,0,0,.2) 100%);
     }
     .hero-tag { position: relative; font-size: .7rem; letter-spacing: .22em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; display: flex; align-items: center; gap: 14px; }
     .hero-tag::before { content: ''; width: 32px; height: 1px; background: var(--gold); }
-    .page-hero h1 { position: relative; font-family: 'Cormorant Garamond', serif; font-size: clamp(3rem, 6vw, 5.5rem); font-weight: 300; color: var(--white); line-height: 1; letter-spacing: -.01em; }
+    .page-hero h1 { text-shadow: 0 2px 20px rgba(0,0,0,.5); position: relative; font-family: 'Cormorant Garamond', serif; font-size: clamp(3rem, 6vw, 5.5rem); font-weight: 300; color: var(--white); line-height: 1; letter-spacing: -.01em; }
     .page-hero h1 em { font-style: italic; color: var(--gold-light); }
     .page-hero p { position: relative; font-size: .95rem; font-weight: 300; color: rgba(255,255,255,.65); max-width: 520px; line-height: 1.8; margin-top: 20px; }
 
