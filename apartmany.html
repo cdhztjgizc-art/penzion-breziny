@@ -15,7 +15,6 @@
     html { scroll-behavior: smooth; }
     body { font-family: 'Jost', sans-serif; background: var(--white); color: var(--forest); overflow-x: hidden; }
 
-    /* NAV */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
@@ -29,110 +28,86 @@
     .nav-cta { border: 1px solid var(--gold); color: var(--gold) !important; padding: 9px 22px; transition: background .3s, color .3s !important; }
     .nav-cta:hover { background: var(--gold); color: var(--forest) !important; }
 
-    /* HERO */
     .page-hero {
       position: relative; height: 55vh; min-height: 420px;
       display: flex; flex-direction: column; justify-content: flex-end;
       padding: 0 100px 80px; overflow: hidden; margin-top: 65px;
     }
-    .page-hero-bg {
-      position: absolute; inset: 0;
-      background: url("img/exterior.jpg") center center/cover no-repeat; background-color: #1e2d1f;
-    }
-    .page-hero-bg::after {
-      content: ''; position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(0,0,0,.75) 0%, rgba(0,0,0,.45) 60%, rgba(0,0,0,.2) 100%);
-    }
+    .page-hero-bg { position: absolute; inset: 0; background: url("img/exterior.jpg") center center/cover no-repeat; background-color: #1e2d1f; }
+    .page-hero-bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,.75) 0%, rgba(0,0,0,.45) 60%, rgba(0,0,0,.2) 100%); }
     .hero-tag { position: relative; font-size: .7rem; letter-spacing: .22em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; display: flex; align-items: center; gap: 14px; }
     .hero-tag::before { content: ''; width: 32px; height: 1px; background: var(--gold); }
     .page-hero h1 { text-shadow: 0 2px 20px rgba(0,0,0,.5); position: relative; font-family: 'Cormorant Garamond', serif; font-size: clamp(3rem, 6vw, 5.5rem); font-weight: 300; color: var(--white); line-height: 1; letter-spacing: -.01em; }
     .page-hero h1 em { font-style: italic; color: var(--gold-light); }
     .page-hero p { position: relative; font-size: .95rem; font-weight: 300; color: rgba(255,255,255,.65); max-width: 520px; line-height: 1.8; margin-top: 20px; }
 
-    /* SECTION BASICS */
     .section-tag { font-size: .68rem; letter-spacing: .22em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; display: flex; align-items: center; gap: 14px; }
     .section-tag::before { content:''; width:32px; height:1px; background:var(--gold); }
     h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem, 3.5vw, 3.2rem); font-weight: 300; line-height: 1.1; color: var(--forest); }
     h2 em { font-style: italic; color: var(--forest-light); }
 
-    /* APT DETAIL */
-    .apt-section {
-      padding: 100px 100px;
-    }
+    .apt-section { padding: 100px 100px; }
     .apt-section:nth-child(even) { background: var(--cream); }
-
     .apt-header { margin-bottom: 60px; }
-    .apt-layout {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start;
-    }
+    .apt-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
     .apt-layout.reverse { direction: rtl; }
     .apt-layout.reverse > * { direction: ltr; }
 
+    /* GALLERY GRID */
     .apt-gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; }
-    .apt-gallery-main { grid-column: span 2; height: 320px; overflow: hidden; position: relative; }
-    .apt-gallery-thumb { height: 160px; overflow: hidden; position: relative; }
-    .apt-gallery-placeholder {
-      position: absolute; inset: 0;
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-style: italic;
-      color: rgba(255,255,255,.3);
+    .apt-gallery-main { grid-column: span 2; height: 320px; overflow: hidden; position: relative; cursor: pointer; }
+    .apt-gallery-thumb { height: 160px; overflow: hidden; position: relative; cursor: pointer; }
+    .apt-gallery-img {
+      position: absolute; inset: 0; background-size: cover; background-position: center;
+      transition: transform .5s ease;
     }
-    .g-jaguar-1 { background: url("img/jaguar-obyvak.jpg") center center/cover no-repeat; }
-    .g-jaguar-2 { background: url("img/jaguar-koupelna.jpg") center center/cover no-repeat; }
-    .g-jaguar-3 { background: url("img/jaguar-loznice.jpg") center center/cover no-repeat; }
-    .g-jaguar-4 { background: url("img/jaguar-kuchyne.jpg") center center/cover no-repeat; }
-    .g-jaguar-5 { background: url("img/jaguar-predsine.jpg") center center/cover no-repeat; }
-    .g-onyx-1 { background: url("img/onyx-obyvak.jpg") center center/cover no-repeat; }
-    .g-onyx-2 { background: url("img/onyx-koupelna.jpg") center center/cover no-repeat; }
-    .g-onyx-3 { background: url("img/onyx-kuchyne.jpg") center center/cover no-repeat; }
-    .g-onyx-4 { background: url("img/onyx-loznice.jpg") center center/cover no-repeat; }
-    .g-onyx-5 { background: url("img/onyx-predsine.jpg") center center/cover no-repeat; }
+    .apt-gallery-main:hover .apt-gallery-img,
+    .apt-gallery-thumb:hover .apt-gallery-img { transform: scale(1.05); }
+    .apt-gallery-zoom {
+      position: absolute; inset: 0; background: rgba(0,0,0,.0); display: flex;
+      align-items: center; justify-content: center; transition: background .3s;
+    }
+    .apt-gallery-main:hover .apt-gallery-zoom,
+    .apt-gallery-thumb:hover .apt-gallery-zoom { background: rgba(0,0,0,.2); }
+    .apt-gallery-zoom span {
+      color: white; font-size: .68rem; letter-spacing: .18em; text-transform: uppercase;
+      border: 1px solid rgba(255,255,255,.5); padding: 8px 18px;
+      opacity: 0; transition: opacity .3s;
+    }
+    .apt-gallery-main:hover .apt-gallery-zoom span,
+    .apt-gallery-thumb:hover .apt-gallery-zoom span { opacity: 1; }
 
-    .apt-name {
-      font-family: 'Cormorant Garamond', serif; font-size: 2.6rem; font-weight: 300;
-      color: var(--forest); margin-bottom: 8px; line-height: 1.1;
-    }
+    .g-jaguar-1 { background-image: url("img/jaguar-obyvak.jpg"); }
+    .g-jaguar-2 { background-image: url("img/jaguar-koupelna.jpg"); }
+    .g-jaguar-3 { background-image: url("img/jaguar-loznice.jpg"); }
+    .g-jaguar-4 { background-image: url("img/jaguar-kuchyne.jpg"); }
+    .g-onyx-1 { background-image: url("img/onyx-obyvak.jpg"); }
+    .g-onyx-2 { background-image: url("img/onyx-koupelna.jpg"); }
+    .g-onyx-3 { background-image: url("img/onyx-loznice.jpg"); }
+    .g-onyx-4 { background-image: url("img/onyx-kuchyne.jpg"); }
+    .g-onyx-5 { background-image: url("img/onyx-jidelna.jpg"); }
+
+    .apt-name { font-family: 'Cormorant Garamond', serif; font-size: 2.6rem; font-weight: 300; color: var(--forest); margin-bottom: 8px; line-height: 1.1; }
     .apt-sub { font-size: .75rem; letter-spacing: .16em; text-transform: uppercase; color: var(--gold); margin-bottom: 24px; }
     .apt-desc { font-size: .95rem; font-weight: 300; color: var(--stone); line-height: 1.85; margin-bottom: 40px; }
 
     .feat-group { margin-bottom: 32px; }
-    .feat-group-title {
-      font-size: .7rem; letter-spacing: .18em; text-transform: uppercase;
-      color: var(--forest); font-weight: 500; margin-bottom: 14px;
-      display: flex; align-items: center; gap: 12px;
-    }
+    .feat-group-title { font-size: .7rem; letter-spacing: .18em; text-transform: uppercase; color: var(--forest); font-weight: 500; margin-bottom: 14px; display: flex; align-items: center; gap: 12px; }
     .feat-group-title::after { content:''; flex:1; height:1px; background:var(--cream-dark); }
     .feat-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
-    .feat-list li {
-      font-size: .88rem; font-weight: 300; color: var(--forest); line-height: 1.5;
-      padding-left: 20px; position: relative;
-    }
+    .feat-list li { font-size: .88rem; font-weight: 300; color: var(--forest); line-height: 1.5; padding-left: 20px; position: relative; }
     .feat-list li::before { content:''; position:absolute; left:0; top:10px; width:8px; height:1px; background:var(--gold); }
     .feat-list li strong { font-weight: 500; }
 
     .apt-cta-row { display: flex; gap: 16px; margin-top: 40px; flex-wrap: wrap; }
-    .btn-primary {
-      background: var(--gold); color: var(--forest); text-decoration: none;
-      padding: 15px 36px; font-size: .78rem; letter-spacing: .14em; text-transform: uppercase;
-      font-weight: 500; transition: background .3s, transform .2s; display: inline-block;
-    }
+    .btn-primary { background: var(--gold); color: var(--forest); text-decoration: none; padding: 15px 36px; font-size: .78rem; letter-spacing: .14em; text-transform: uppercase; font-weight: 500; transition: background .3s, transform .2s; display: inline-block; }
     .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
-    .btn-outline {
-      border: 1px solid var(--forest); color: var(--forest); text-decoration: none;
-      padding: 15px 36px; font-size: .78rem; letter-spacing: .14em; text-transform: uppercase;
-      font-weight: 400; transition: border-color .3s, background .3s; display: inline-block;
-    }
+    .btn-outline { border: 1px solid var(--forest); color: var(--forest); text-decoration: none; padding: 15px 36px; font-size: .78rem; letter-spacing: .14em; text-transform: uppercase; font-weight: 400; transition: border-color .3s, background .3s; display: inline-block; }
     .btn-outline:hover { background: var(--forest); color: var(--white); }
 
-    /* CAPACITY BADGES */
     .apt-badges { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 32px; }
-    .apt-badge {
-      border: 1px solid var(--cream-dark); background: var(--cream);
-      padding: 8px 18px; font-size: .72rem; letter-spacing: .1em; text-transform: uppercase;
-      color: var(--forest); font-weight: 400;
-    }
+    .apt-badge { border: 1px solid var(--cream-dark); background: var(--cream); padding: 8px 18px; font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; color: var(--forest); font-weight: 400; }
 
-    /* COMPARE */
     #compare { background: var(--forest); padding: 100px 100px; }
     #compare h2 { color: var(--white); margin-bottom: 60px; }
     #compare .section-tag { color: var(--gold); }
@@ -141,20 +116,18 @@
     .compare-card-name { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 300; color: var(--white); margin-bottom: 6px; }
     .compare-card-sub { font-size: .68rem; letter-spacing: .16em; text-transform: uppercase; color: var(--gold); margin-bottom: 28px; }
     .compare-row { display: flex; justify-content: space-between; align-items: center; padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,.07); }
-    .compare-row:last-child { border-bottom: none; }
+    .compare-row:last-of-type { border-bottom: none; }
     .compare-label { font-size: .8rem; color: rgba(255,255,255,.5); font-weight: 300; }
     .compare-val { font-size: .88rem; color: var(--white); font-weight: 400; }
     .compare-val.gold { color: var(--gold); }
-    .compare-link { display: inline-block; margin-top: 32px; font-size: .75rem; letter-spacing: .16em; text-transform: uppercase; color: var(--gold); text-decoration: none; display: flex; align-items: center; gap: 10px; transition: gap .3s; }
+    .compare-link { display: inline-flex; margin-top: 32px; font-size: .75rem; letter-spacing: .16em; text-transform: uppercase; color: var(--gold); text-decoration: none; align-items: center; gap: 10px; transition: gap .3s; }
     .compare-link::after { content:'→'; }
     .compare-link:hover { gap: 18px; }
 
-    /* CTA BAND */
     .cta-band { background: var(--cream); padding: 80px 100px; display: flex; justify-content: space-between; align-items: center; gap: 40px; }
     .cta-band h2 { max-width: 500px; }
     .cta-band p { font-size: .92rem; font-weight: 300; color: var(--stone); line-height: 1.8; max-width: 400px; }
 
-    /* FOOTER */
     footer { background: #141e14; padding: 50px 100px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(184,150,74,.12); flex-wrap: wrap; gap: 20px; }
     .footer-brand { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 300; color: var(--white); }
     .footer-brand span { color: var(--gold); }
@@ -163,12 +136,25 @@
     .footer-links a { font-size: .7rem; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.35); text-decoration: none; transition: color .3s; }
     .footer-links a:hover { color: var(--gold); }
 
-    /* FADE */
-    .fade-up { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
-    .fade-up.visible { opacity: 1; transform: none; }
+    /* LIGHTBOX */
+    .lb-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.92); z-index: 9999; display: none; align-items: center; justify-content: center; }
+    .lb-overlay.open { display: flex; }
+    .lb-inner { position: relative; max-width: 90vw; max-height: 90vh; }
+    .lb-img { max-width: 90vw; max-height: 85vh; object-fit: contain; display: block; }
+    .lb-close { position: absolute; top: -44px; right: 0; color: rgba(255,255,255,.7); font-size: 1.6rem; cursor: pointer; background: none; border: none; line-height: 1; transition: color .2s; }
+    .lb-close:hover { color: var(--gold); }
+    .lb-prev, .lb-next { position: fixed; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.15); color: rgba(255,255,255,.8); font-size: 1.4rem; width: 52px; height: 52px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background .2s, color .2s; }
+    .lb-prev { left: 24px; }
+    .lb-next { right: 24px; }
+    .lb-prev:hover, .lb-next:hover { background: rgba(184,150,74,.25); color: var(--gold); }
+    .lb-caption { text-align: center; color: rgba(255,255,255,.5); font-size: .75rem; letter-spacing: .14em; text-transform: uppercase; margin-top: 16px; }
+
+    .fade-up { opacity: 1; transform: none; transition: opacity .6s ease, transform .6s ease; }
+    .fade-up.animated { opacity: 0; transform: translateY(24px); }
+    .fade-up.animated.visible { opacity: 1; transform: none; }
 
     @media (max-width: 1000px) {
-      nav { padding: 18px 32px; }
+      nav { padding: 18px 32px; } .nav-links { display: none; }
       .page-hero { padding: 0 40px 60px; }
       .apt-section { padding: 80px 40px; }
       .apt-layout { grid-template-columns: 1fr; gap: 48px; }
@@ -177,11 +163,21 @@
       .compare-grid { grid-template-columns: 1fr; }
       .cta-band { flex-direction: column; padding: 60px 40px; }
       footer { padding: 40px 40px; }
-      .nav-links { display: none; }
     }
   </style>
 </head>
 <body>
+
+  <!-- LIGHTBOX -->
+  <div class="lb-overlay" id="lightbox" onclick="lbClickOutside(event)">
+    <button class="lb-prev" onclick="lbMove(-1)">&#8592;</button>
+    <div class="lb-inner">
+      <button class="lb-close" onclick="lbClose()">&#x2715;</button>
+      <img class="lb-img" id="lb-img" src="" alt="" />
+      <div class="lb-caption" id="lb-caption"></div>
+    </div>
+    <button class="lb-next" onclick="lbMove(1)">&#8594;</button>
+  </div>
 
 <nav>
   <a href="index.html" class="nav-logo">Penzion <span>Březiny</span></a>
@@ -194,7 +190,6 @@
   </ul>
 </nav>
 
-<!-- HERO -->
 <div class="page-hero">
   <div class="page-hero-bg"></div>
   <p class="hero-tag">Ubytování</p>
@@ -210,20 +205,21 @@
   </div>
   <div class="apt-layout">
     <div class="apt-gallery fade-up">
-      <div class="apt-gallery-main">
-        <div class="apt-gallery-placeholder g-jaguar-1"><span>Obývací pokoj · Jaguár</span></div>
+      <div class="apt-gallery-main" onclick="lbOpenSet('jaguar', 0)">
+        <div class="apt-gallery-img g-jaguar-1"></div>
+        <div class="apt-gallery-zoom"><span>Zvětšit</span></div>
       </div>
-      <div class="apt-gallery-thumb">
-        <div class="apt-gallery-placeholder g-jaguar-2"><span>Koupelna</span></div>
+      <div class="apt-gallery-thumb" onclick="lbOpenSet('jaguar', 1)">
+        <div class="apt-gallery-img g-jaguar-2"></div>
+        <div class="apt-gallery-zoom"><span>Zvětšit</span></div>
       </div>
-      <div class="apt-gallery-thumb">
-        <div class="apt-gallery-placeholder g-jaguar-3"><span>Ložnice</span></div>
+      <div class="apt-gallery-thumb" onclick="lbOpenSet('jaguar', 2)">
+        <div class="apt-gallery-img g-jaguar-3"></div>
+        <div class="apt-gallery-zoom"><span>Zvětšit</span></div>
       </div>
-      <div class="apt-gallery-thumb">
-        <div class="apt-gallery-placeholder g-jaguar-4"><span>Kuchyně</span></div>
-      </div>
-      <div class="apt-gallery-thumb">
-        <div class="apt-gallery-placeholder g-jaguar-5"><span>Terasa</span></div>
+      <div class="apt-gallery-thumb" onclick="lbOpenSet('jaguar', 3)">
+        <div class="apt-gallery-img g-jaguar-4"></div>
+        <div class="apt-gallery-zoom"><span>Zvětšit</span></div>
       </div>
     </div>
     <div class="fade-up">
@@ -245,7 +241,6 @@
           <li><strong>Exteriér:</strong> Soukromá terasa s venkovním posezením</li>
         </ul>
       </div>
-
       <div class="feat-group">
         <div class="feat-group-title">Spánek a relax</div>
         <ul class="feat-list">
@@ -253,7 +248,6 @@
           <li><strong>Obývák:</strong> Prostorná rozkládací pohovka</li>
         </ul>
       </div>
-
       <div class="feat-group">
         <div class="feat-group-title">Kuchyně a stolování</div>
         <ul class="feat-list">
@@ -264,17 +258,14 @@
           <li><strong>Nádobí:</strong> Kompletní sada hrnců, talířů, příborů a sklenic na víno</li>
         </ul>
       </div>
-
       <div class="feat-group">
         <div class="feat-group-title">Koupelna a hygiena</div>
         <ul class="feat-list">
           <li><strong>Koupelna:</strong> Luxusní volně stojící vana a sprchový kout</li>
-          <li><strong>Další:</strong> Samostatný sprchový kout</li>
           <li><strong>Pro vás:</strong> Měkké ručníky, osušky a kvalitní hotelová kosmetika</li>
           <li><strong>Praktické:</strong> Fén na vlasy</li>
         </ul>
       </div>
-
       <div class="feat-group">
         <div class="feat-group-title">Technologie</div>
         <ul class="feat-list">
@@ -282,7 +273,6 @@
           <li><strong>Zábava:</strong> Smart TV (s možností Netflixu/YouTube)</li>
         </ul>
       </div>
-
       <div class="apt-cta-row">
         <a href="kontakt.html" class="btn-primary">Rezervovat Jaguár</a>
         <a href="#onyx" class="btn-outline">Prohlédnout Onyx</a>
@@ -299,20 +289,25 @@
   </div>
   <div class="apt-layout reverse">
     <div class="apt-gallery fade-up">
-      <div class="apt-gallery-main">
-        <div class="apt-gallery-placeholder g-onyx-1"><span>Obývací pokoj · Onyx</span></div>
+      <div class="apt-gallery-main" onclick="lbOpenSet('onyx', 0)">
+        <div class="apt-gallery-img g-onyx-1"></div>
+        <div class="apt-gallery-zoom"><span>Zvětšit</span></div>
       </div>
-      <div class="apt-gallery-thumb">
-        <div class="apt-gallery-placeholder g-onyx-2"><span>Koupelna</span></div>
+      <div class="apt-gallery-thumb" onclick="lbOpenSet('onyx', 1)">
+        <div class="apt-gallery-img g-onyx-2"></div>
+        <div class="apt-gallery-zoom"><span>Zvětšit</span></div>
       </div>
-      <div class="apt-gallery-thumb">
-        <div class="apt-gallery-placeholder g-onyx-3"><span>Kuchyňka</span></div>
+      <div class="apt-gallery-thumb" onclick="lbOpenSet('onyx', 2)">
+        <div class="apt-gallery-img g-onyx-3"></div>
+        <div class="apt-gallery-zoom"><span>Zvětšit</span></div>
       </div>
-      <div class="apt-gallery-thumb">
-        <div class="apt-gallery-placeholder g-onyx-4"><span>Ložnice</span></div>
+      <div class="apt-gallery-thumb" onclick="lbOpenSet('onyx', 3)">
+        <div class="apt-gallery-img g-onyx-4"></div>
+        <div class="apt-gallery-zoom"><span>Zvětšit</span></div>
       </div>
-      <div class="apt-gallery-thumb">
-        <div class="apt-gallery-placeholder g-onyx-5"><span>Výhled</span></div>
+      <div class="apt-gallery-thumb" onclick="lbOpenSet('onyx', 4)">
+        <div class="apt-gallery-img g-onyx-5"></div>
+        <div class="apt-gallery-zoom"><span>Zvětšit</span></div>
       </div>
     </div>
     <div class="fade-up">
@@ -334,7 +329,6 @@
           <li><strong>Výhled:</strong> Nádherné výhledy na okolní přírodu</li>
         </ul>
       </div>
-
       <div class="feat-group">
         <div class="feat-group-title">Spánek a relax</div>
         <ul class="feat-list">
@@ -342,17 +336,15 @@
           <li><strong>Obývák:</strong> Pohodlný gauč (s možností rozložení pro další hosty)</li>
         </ul>
       </div>
-
       <div class="feat-group">
         <div class="feat-group-title">Kuchyně a stolování</div>
         <ul class="feat-list">
           <li><strong>Vybavení:</strong> Prakticky řešená menší kuchyňka</li>
           <li><strong>Spotřebiče:</strong> Indukční deska, lednice, trouba a mikrovlnka</li>
           <li><strong>Káva a čaj:</strong> Rychlovarná konvice a základní potřeby pro přípravu nápojů</li>
-          <li><strong>Nádobí:</strong> Vše potřebné pro vaření a stolování ve čtyřech</li>
+          <li><strong>Nádobí:</strong> Vše potřebné pro vaření a stolování</li>
         </ul>
       </div>
-
       <div class="feat-group">
         <div class="feat-group-title">Koupelna a hygiena</div>
         <ul class="feat-list">
@@ -361,7 +353,6 @@
           <li><strong>Praktické:</strong> Fén na vlasy</li>
         </ul>
       </div>
-
       <div class="feat-group">
         <div class="feat-group-title">Technologie a komfort</div>
         <ul class="feat-list">
@@ -369,7 +360,6 @@
           <li><strong>Zábava:</strong> Smart TV pro večerní relaxaci</li>
         </ul>
       </div>
-
       <div class="apt-cta-row">
         <a href="kontakt.html" class="btn-primary">Rezervovat Onyx</a>
         <a href="#jaguar" class="btn-outline">Zpět na Jaguár</a>
@@ -408,7 +398,6 @@
   </div>
 </section>
 
-<!-- CTA BAND -->
 <div class="cta-band">
   <div>
     <p class="section-tag">Rezervace</p>
@@ -430,8 +419,62 @@
 </footer>
 
 <script>
-  const obs = new IntersectionObserver(e => e.forEach(el => { if(el.isIntersecting){el.target.classList.add('visible');obs.unobserve(el.target);} }), {threshold:.12});
-  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+  // Fade-up
+  const fadeEls = document.querySelectorAll('.fade-up');
+  if ('IntersectionObserver' in window) {
+    fadeEls.forEach(el => el.classList.add('animated'));
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+    }, { threshold: 0.1 });
+    fadeEls.forEach(el => obs.observe(el));
+  }
+
+  // Lightbox
+  const lbSets = {
+    jaguar: [
+      { src: 'img/jaguar-obyvak.jpg', cap: 'Jaguár – Obývací pokoj' },
+      { src: 'img/jaguar-koupelna.jpg', cap: 'Jaguár – Koupelna' },
+      { src: 'img/jaguar-loznice.jpg', cap: 'Jaguár – Ložnice' },
+      { src: 'img/jaguar-kuchyne.jpg', cap: 'Jaguár – Kuchyně' },
+    ],
+    onyx: [
+      { src: 'img/onyx-obyvak.jpg', cap: 'Onyx – Obývací pokoj' },
+      { src: 'img/onyx-koupelna.jpg', cap: 'Onyx – Koupelna' },
+      { src: 'img/onyx-loznice.jpg', cap: 'Onyx – Ložnice' },
+      { src: 'img/onyx-kuchyne.jpg', cap: 'Onyx – Kuchyňka' },
+      { src: 'img/onyx-jidelna.jpg', cap: 'Onyx – Jídelna' },
+    ]
+  };
+  let curSet = [], curIdx = 0;
+
+  function lbOpenSet(setName, idx) {
+    curSet = lbSets[setName];
+    curIdx = idx;
+    lbShow();
+  }
+  function lbShow() {
+    document.getElementById('lb-img').src = curSet[curIdx].src;
+    document.getElementById('lb-caption').textContent = curSet[curIdx].cap;
+    document.getElementById('lightbox').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function lbClose() {
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function lbMove(dir) {
+    curIdx = (curIdx + dir + curSet.length) % curSet.length;
+    lbShow();
+  }
+  function lbClickOutside(e) {
+    if (e.target === document.getElementById('lightbox')) lbClose();
+  }
+  document.addEventListener('keydown', e => {
+    if (!document.getElementById('lightbox').classList.contains('open')) return;
+    if (e.key === 'Escape') lbClose();
+    if (e.key === 'ArrowLeft') lbMove(-1);
+    if (e.key === 'ArrowRight') lbMove(1);
+  });
 </script>
 </body>
 </html>

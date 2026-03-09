@@ -47,10 +47,11 @@
     h2 { font-family:'Cormorant Garamond',serif; font-size:clamp(2.2rem,3.5vw,3.2rem); font-weight:300; line-height:1.1; color:var(--forest); }
     h2 em { font-style:italic; color:var(--forest-light); }
 
-    /* RESTAURANTS */
     .cat-section { padding: 100px 100px; }
     .cat-section:nth-child(even) { background: var(--cream); }
     .cat-header { margin-bottom: 56px; }
+
+    /* RESTAURANTS */
     .resto-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: var(--cream-dark); }
     .cat-section:nth-child(even) .resto-grid { background: var(--cream-dark); }
     .resto-card { background: var(--white); overflow: hidden; }
@@ -59,25 +60,20 @@
     .rt1 { background: url("img/pizza.jpg") center center/cover no-repeat; }
     .rt2 { background: url("img/restaurace-hora.jpg") center center/cover no-repeat; }
     .rt3 { background: url("img/ceska-kuchyne.jpg") center center/cover no-repeat; }
-    .resto-thumb-label {
-      position:absolute; bottom:0; left:0; right:0; padding:24px 24px 20px;
-      background:linear-gradient(to top, rgba(0,0,0,.6) 0%, transparent 100%);
-    }
+    .resto-thumb-label { position:absolute; bottom:0; left:0; right:0; padding:24px 24px 20px; background:linear-gradient(to top, rgba(0,0,0,.6) 0%, transparent 100%); }
     .resto-thumb-name { font-family:'Cormorant Garamond',serif; font-size:1.2rem; font-weight:300; color:var(--white); }
     .resto-body { padding: 32px 32px 40px; }
     .resto-tag { font-size:.68rem; letter-spacing:.14em; text-transform:uppercase; color:var(--gold); margin-bottom:12px; }
     .resto-desc { font-size:.88rem; font-weight:300; color:var(--stone); line-height:1.75; margin-bottom:24px; }
+    .resto-dist { font-size:.78rem; color:var(--stone); margin-bottom:20px; display:flex; align-items:center; gap:8px; }
+    .resto-dist::before { content:''; width:16px; height:1px; background:var(--gold); }
     .resto-link { font-size:.75rem; letter-spacing:.14em; text-transform:uppercase; color:var(--forest); text-decoration:none; display:flex; align-items:center; gap:10px; transition:gap .3s; font-weight:500; }
     .resto-link::after { content:'→'; color:var(--gold); }
     .resto-link:hover { gap:16px; }
 
     /* TRIPS */
     .trips-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: var(--cream-dark); }
-    .trip-card {
-      background: var(--forest); overflow: hidden; position: relative;
-      padding: 48px 40px; display: flex; flex-direction: column; gap: 20px;
-      min-height: 340px;
-    }
+    .trip-card { background: var(--forest); overflow: hidden; position: relative; padding: 48px 40px; display: flex; flex-direction: column; gap: 20px; min-height: 340px; }
     .trip-number { font-family:'Cormorant Garamond',serif; font-size:4rem; font-weight:300; color:rgba(255,255,255,.06); line-height:1; margin-bottom:-10px; }
     .trip-category { font-size:.68rem; letter-spacing:.18em; text-transform:uppercase; color:var(--gold); }
     .trip-name { font-family:'Cormorant Garamond',serif; font-size:1.6rem; font-weight:300; color:var(--white); line-height:1.2; }
@@ -85,6 +81,7 @@
     .trip-items { list-style:none; display:flex; flex-direction:column; gap:6px; }
     .trip-items li { font-size:.8rem; color:rgba(255,255,255,.65); padding-left:18px; position:relative; }
     .trip-items li::before { content:''; position:absolute; left:0; top:9px; width:8px; height:1px; background:var(--gold); }
+    .trip-dist { font-size:.72rem; color:var(--gold); margin-top:4px; }
 
     /* PDF PROMO */
     .pdf-section {
@@ -97,10 +94,7 @@
     .pdf-right { flex-shrink:0; }
     .btn-primary { background:var(--gold); color:var(--forest); text-decoration:none; padding:16px 40px; font-size:.78rem; letter-spacing:.14em; text-transform:uppercase; font-weight:500; transition:background .3s, transform .2s; display:inline-block; }
     .btn-primary:hover { background:var(--gold-light); transform:translateY(-2px); }
-    .btn-outline-light { border:1px solid rgba(255,255,255,.3); color:var(--white); text-decoration:none; padding:16px 40px; font-size:.78rem; letter-spacing:.14em; text-transform:uppercase; font-weight:400; transition:border-color .3s, background .3s; display:inline-block; }
-    .btn-outline-light:hover { border-color:var(--white); background:rgba(255,255,255,.06); }
 
-    /* CTA */
     .cta-strip { background: var(--cream); padding: 80px 100px; text-align:center; display:flex; flex-direction:column; align-items:center; gap:24px; }
     .cta-strip h2 { max-width: 600px; }
     .cta-strip p { font-size:.92rem; font-weight:300; color:var(--stone); line-height:1.8; max-width:480px; }
@@ -113,8 +107,9 @@
     .footer-links a { font-size:.7rem; letter-spacing:.1em; text-transform:uppercase; color:rgba(255,255,255,.35); text-decoration:none; transition:color .3s; }
     .footer-links a:hover { color:var(--gold); }
 
-    .fade-up { opacity:0; transform:translateY(24px); transition:opacity .6s ease, transform .6s ease; }
-    .fade-up.visible { opacity:1; transform:none; }
+    .fade-up { opacity:1; transform:none; transition:opacity .6s ease, transform .6s ease; }
+    .fade-up.animated { opacity:0; transform:translateY(24px); }
+    .fade-up.animated.visible { opacity:1; transform:none; }
 
     @media (max-width:1000px) {
       nav { padding:18px 32px; } .nav-links { display:none; }
@@ -162,32 +157,35 @@
       </div>
       <div class="resto-body">
         <div class="resto-tag">Pizza & Burgery · Ratiboř</div>
+        <div class="resto-dist">cca 3 minuty autem</div>
         <p class="resto-desc">Skvělé místo pro milovníky výborné pizzy a poctivých burgerů, vzdálené jen kousek od penzionu. Rychlý dovoz jídla přímo k vašim dveřím.</p>
-        <a href="#" class="resto-link">Zobrazit menu</a>
+        <a href="https://maps.google.com/?q=Pizzerie+U+Ogarů+Ratiboř" target="_blank" class="resto-link">Zobrazit na mapě</a>
       </div>
     </div>
     <div class="resto-card">
       <div class="resto-thumb rt2">
         <div class="resto-thumb-label">
-          <div class="resto-thumb-name">Obecní hospoda Hošťálková</div>
+          <div class="resto-thumb-name">Restaurace a Penzion HORA</div>
         </div>
       </div>
       <div class="resto-body">
-        <div class="resto-tag">Česká kuchyně · Hošťálková</div>
-        <p class="resto-desc">Klasická restaurace s útulnou atmosférou a výbornou českou kuchyní. Ideální volba pro vydatné polední menu po návratu z výletu.</p>
-        <a href="#" class="resto-link">Zobrazit menu</a>
+        <div class="resto-tag">Česká kuchyně & Fine dining</div>
+        <div class="resto-dist">cca 10 minut autem</div>
+        <p class="resto-desc">Pokud hledáte místo pro klidnou a elegantní večeři s výbornou kuchyní a příjemnou obsluhou, Restaurace Hora je skvělou volbou pro váš výlet.</p>
+        <a href="https://maps.google.com/?q=Restaurace+Hora+Hošťálková" target="_blank" class="resto-link">Zobrazit na mapě</a>
       </div>
     </div>
     <div class="resto-card">
       <div class="resto-thumb rt3">
         <div class="resto-thumb-label">
-          <div class="resto-thumb-name">Restaurace a Penzion HORA</div>
+          <div class="resto-thumb-name">Česká tradiční kuchyně</div>
         </div>
       </div>
       <div class="resto-body">
-        <div class="resto-tag">Večeře & Fine dining</div>
-        <p class="resto-desc">Pokud hledáte místo pro klidnou a elegantní večeři s výbornou kuchyní a příjemnou obsluhou, doporučujeme navštívit tento podnik.</p>
-        <a href="#" class="resto-link">Zobrazit menu</a>
+        <div class="resto-tag">Česká kuchyně · Vsetín</div>
+        <div class="resto-dist">cca 15 minut autem</div>
+        <p class="resto-desc">Klasická česká kuchyně s domácí atmosférou. Ideální pro vydatné polední menu po návratu z túry nebo výletu do okolních kopců.</p>
+        <a href="https://maps.google.com/?q=restaurace+Vsetín" target="_blank" class="resto-link">Zobrazit na mapě</a>
       </div>
     </div>
   </div>
@@ -209,8 +207,9 @@
         <li>Rozhledna Maruška – panorama Beskyd</li>
         <li>Rozhledna Vartovna – výhled na Javorníky</li>
         <li>Hřebenové trasy Hostýnských vrchů</li>
-        <li>Houbaření v sezóně (srpno–říjen)</li>
+        <li>Houbaření v sezóně (srpen–říjen)</li>
       </ul>
+      <div class="trip-dist">cca 15–30 min od penzionu</div>
     </div>
     <div class="trip-card">
       <div class="trip-number">02</div>
@@ -223,6 +222,7 @@
         <li>Letní koupání – koupaliště Vsetín</li>
         <li>Vodácká sezóna na Bečvě</li>
       </ul>
+      <div class="trip-dist">cca 10–20 min od penzionu</div>
     </div>
     <div class="trip-card">
       <div class="trip-number">03</div>
@@ -231,19 +231,20 @@
       <div class="trip-desc">Valašsko má bohatou historii a kulturu. Rožnov pod Radhoštěm, ZOO Zlín-Lešná nebo historický zámek Vsetín – vyberte si dle nálady.</div>
       <ul class="trip-items">
         <li>Valašské muzeum v přírodě – Rožnov</li>
-        <li>ZOO Zlín-Lešná – přes 2200 zvířat</li>
+        <li>ZOO Zlín-Lešná – přes 2 200 zvířat</li>
         <li>Historický zámek Vsetín</li>
         <li>Rajnochovická lesní železnice</li>
       </ul>
+      <div class="trip-dist">cca 20–40 min od penzionu</div>
     </div>
   </div>
 </section>
 
 <!-- PDF PROMO -->
-<div class="pdf-section">
+<div class="pdf-section fade-up">
   <div class="pdf-left">
     <p class="section-tag">Průvodce</p>
-    <h2 style="color:var(--white);">Stáhněte si <em>PDF průvodce</em></h2>
+    <h2>Stáhněte si <em>PDF průvodce</em></h2>
     <p>Abychom vám plánování co nejvíce usnadnili, připravili jsme detailní průvodce tím nejlepším z okolí Kateřinic. Stáhněte si ho a naplánujte si svůj program z pohodlí apartmánu.</p>
   </div>
   <div class="pdf-right">
@@ -251,17 +252,17 @@
   </div>
 </div>
 
-<!-- SPECIAL REQUEST -->
+<!-- CTA -->
 <div class="cta-strip fade-up">
   <p class="section-tag" style="justify-content:center;">Speciální přání</p>
   <h2>Hledáte tip na <em>konkrétní výlet?</em></h2>
   <p>Máte speciální přání nebo hledáte tip na konkrétní výlet? Rádi vám s plánováním poradíme – stačí se ozvat.</p>
-  <a href="kontakt.html" class="btn-primary">Přejít na kontakt</a>
+  <a href="kontakt.html" class="btn-primary">Napsat nám</a>
 </div>
 
 <footer>
   <div class="footer-brand">Penzion <span>Březiny</span></div>
-  <div class="footer-copy">© 2026 Penzion Březiny · Všechna práva vyhrazena</div>
+  <div class="footer-copy">© 2026 Penzion Березiny · Všechna práva vyhrazena</div>
   <div class="footer-links">
     <a href="#">Ochrana osobních údajů</a>
     <a href="#">Přístupnost</a>
@@ -269,8 +270,14 @@
 </footer>
 
 <script>
-  const obs = new IntersectionObserver(e => e.forEach(el => { if(el.isIntersecting){el.target.classList.add('visible');obs.unobserve(el.target);} }), {threshold:.1});
-  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+  const fadeEls = document.querySelectorAll('.fade-up');
+  if ('IntersectionObserver' in window) {
+    fadeEls.forEach(el => el.classList.add('animated'));
+    const obs = new IntersectionObserver(e => e.forEach(el => {
+      if (el.isIntersecting) { el.target.classList.add('visible'); obs.unobserve(el.target); }
+    }), { threshold: .1 });
+    fadeEls.forEach(el => obs.observe(el));
+  }
 </script>
 </body>
 </html>

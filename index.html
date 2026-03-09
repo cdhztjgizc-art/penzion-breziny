@@ -39,7 +39,6 @@
     .hero-bg::after { content: ''; position: absolute; inset: 0; background-image: radial-gradient(ellipse 80% 50% at 70% 40%, rgba(184,150,74,.12) 0%, transparent 60%), radial-gradient(ellipse 50% 80% at 20% 70%, rgba(30,45,31,.6) 0%, transparent 60%); }
     .hero-noise { position: absolute; inset: 0; opacity: .04; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); background-size: 200px 200px; }
     .hero-line { position: absolute; top: 0; left: 60px; width: 1px; height: 100%; background: linear-gradient(to bottom, transparent, rgba(184,150,74,.4), transparent); }
-
     .hero-tag { position: relative; font-size: .72rem; letter-spacing: .22em; text-transform: uppercase; color: var(--gold); margin-bottom: 28px; display: flex; align-items: center; gap: 16px; }
     .hero-tag::before { content: ''; width: 40px; height: 1px; background: var(--gold); }
     h1 { text-shadow: 0 2px 20px rgba(0,0,0,.5); position: relative; font-family: 'Cormorant Garamond', serif; font-size: clamp(3.5rem, 7vw, 7rem); font-weight: 300; line-height: 1; color: var(--white); letter-spacing: -.01em; max-width: 700px; margin-bottom: 32px; }
@@ -69,8 +68,7 @@
     .stat-num span { font-size: 1.2rem; color: var(--gold); margin-left: 2px; }
     .stat-label { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; color: var(--stone); margin-top: 6px; }
     .intro-visual { position: relative; overflow: hidden; background: var(--forest-mid); }
-    .intro-visual-inner { position: absolute; inset: 0; background: url("img/exterior-vana.jpg") center center/cover no-repeat; background-color: #2e4530; display: flex; align-items: center; justify-content: center; }
-    .intro-visual-inner svg { opacity: .08; width: 60%; }
+    .intro-visual-inner { position: absolute; inset: 0; background: url("img/exterior-vana.jpg") center center/cover no-repeat; background-color: #2e4530; }
     .intro-quote { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 60px; text-align: center; background: rgba(20,35,20,.45); }
     .intro-quote blockquote { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 300; font-style: italic; color: var(--white); line-height: 1.5; margin-bottom: 24px; }
     .intro-quote cite { font-size: .72rem; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); font-style: normal; }
@@ -82,11 +80,16 @@
     .apartments-header .lead { text-align: right; max-width: 320px; }
     .apt-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; background: var(--cream-dark); margin: 0 100px; }
     .apt-card { background: var(--white); overflow: hidden; }
-    .apt-visual { height: 360px; position: relative; overflow: hidden; }
-    .apt-jaguar-bg { position: absolute; inset: 0; background: url("img/jaguar-obyvak.jpg") center center/cover no-repeat; }
-    .apt-onyx-bg { position: absolute; inset: 0; background: url("img/onyx-koupelna.jpg") center center/cover no-repeat; }
-    .apt-visual-label { position: absolute; top: 32px; left: 36px; font-family: 'Cormorant Garamond', serif; font-size: 4rem; font-weight: 300; color: rgba(255,255,255,.12); letter-spacing: -.02em; line-height: 1; }
-    .apt-badge-row { position: absolute; bottom: 24px; left: 36px; display: flex; gap: 8px; flex-wrap: wrap; }
+    .apt-visual { height: 360px; position: relative; overflow: hidden; cursor: pointer; }
+    .apt-visual:hover .apt-zoom-hint { opacity: 1; }
+    .apt-zoom-hint { position: absolute; inset: 0; background: rgba(0,0,0,.25); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity .3s; z-index: 2; }
+    .apt-zoom-hint span { color: var(--white); font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; border: 1px solid rgba(255,255,255,.5); padding: 10px 22px; }
+    .apt-jaguar-bg { position: absolute; inset: 0; background: url("img/jaguar-obyvak.jpg") center center/cover no-repeat; transition: transform .6s ease; }
+    .apt-onyx-bg { position: absolute; inset: 0; background: url("img/onyx-koupelna.jpg") center center/cover no-repeat; transition: transform .6s ease; }
+    .apt-visual:hover .apt-jaguar-bg,
+    .apt-visual:hover .apt-onyx-bg { transform: scale(1.04); }
+    .apt-visual-label { position: absolute; top: 32px; left: 36px; font-family: 'Cormorant Garamond', serif; font-size: 4rem; font-weight: 300; color: rgba(255,255,255,.12); letter-spacing: -.02em; line-height: 1; z-index: 1; }
+    .apt-badge-row { position: absolute; bottom: 24px; left: 36px; display: flex; gap: 8px; flex-wrap: wrap; z-index: 1; }
     .badge { background: rgba(255,255,255,.1); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,.15); color: rgba(255,255,255,.85); font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; padding: 6px 14px; }
     .apt-body { padding: 48px 48px 56px; }
     .apt-name { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 300; color: var(--forest); margin-bottom: 16px; }
@@ -116,39 +119,34 @@
     .wellness-ring { width: 280px; height: 280px; border-radius: 50%; border: 1px solid rgba(184,150,74,.25); display: flex; align-items: center; justify-content: center; position: relative; }
     .wellness-ring::before { content:''; position:absolute; inset:20px; border-radius:50%; border:1px solid rgba(184,150,74,.15); }
     .wellness-ring-text { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-style: italic; color: rgba(255,255,255,.6); text-align: center; line-height: 1.6; padding: 40px; }
-    .wellness-cta-link { border: 1px solid rgba(184,150,74,.4); color: var(--gold); text-decoration: none; padding: 12px 28px; font-size: .72rem; letter-spacing: .16em; text-transform: uppercase; transition: background .3s, border-color .3s; }
+    .wellness-cta-link { position: relative; border: 1px solid rgba(184,150,74,.4); color: var(--gold); text-decoration: none; padding: 12px 28px; font-size: .72rem; letter-spacing: .16em; text-transform: uppercase; transition: background .3s, border-color .3s; }
     .wellness-cta-link:hover { background: rgba(184,150,74,.1); border-color: var(--gold); }
 
     /* GALLERY */
     #gallery { background: var(--cream); padding: 120px 100px; }
-    .gallery-header h2 { font-size: clamp(2.4rem, 4vw, 3.6rem); }
     .gallery-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 60px; }
+    .gallery-header h2 { font-size: clamp(2.4rem, 4vw, 3.6rem); }
     .gallery-header .lead { text-align: right; max-width: 280px; }
     .gallery-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; grid-template-rows: 280px 280px; gap: 4px; }
-    .gallery-item { position: relative; overflow: hidden; }
+    .gallery-item { position: relative; overflow: hidden; cursor: pointer; }
     .gallery-item:first-child { grid-row: span 2; }
     .gallery-item-inner { position: absolute; inset: 0; transition: transform .6s ease; }
     .gallery-item:hover .gallery-item-inner { transform: scale(1.04); }
-    .g1 { background-color: #2a4030; background: url("img/exterior.jpg") center center/cover no-repeat; }
-    .g2 { background-color: #1e2e20; background: url("img/vana-zapad2.jpg") center center/cover no-repeat; }
-    .g3 { background-color: #243028; background: url("img/jaguar-koupelna.jpg") center center/cover no-repeat; }
-    .g4 { background-color: #1a2820; background: url("img/onyx-obyvak.jpg") center center/cover no-repeat; }
-    .g5 { background-color: #202e22; background: url("img/priroda-louka.jpg") center center/cover no-repeat; }
+    .g1 { background: url("img/exterior.jpg") center center/cover no-repeat; }
+    .g2 { background: url("img/vana-zapad2.jpg") center center/cover no-repeat; }
+    .g3 { background: url("img/jaguar-koupelna.jpg") center center/cover no-repeat; }
+    .g4 { background: url("img/onyx-obyvak.jpg") center center/cover no-repeat; }
+    .g5 { background: url("img/priroda-louka.jpg") center center/cover no-repeat; }
     .gallery-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(30,45,31,.6) 0%, transparent 50%); opacity: 0; transition: opacity .4s; display: flex; align-items: flex-end; padding: 24px; }
     .gallery-item:hover .gallery-overlay { opacity: 1; }
     .gallery-caption { font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.85); }
-    .g1::after,.g2::after,.g3::after,.g4::after,.g5::after { content:''; position:absolute; inset:0; opacity:.15; }
-    .g1::after { background:radial-gradient(circle at 60% 40%, rgba(184,150,74,.6) 0%, transparent 60%); }
-    .g2::after { background:radial-gradient(circle at 40% 60%, rgba(255,255,255,.3) 0%, transparent 50%); }
-    .g3::after { background:radial-gradient(circle at 50% 50%, rgba(184,150,74,.4) 0%, transparent 60%); }
-    .g4::after { background:radial-gradient(circle at 30% 40%, rgba(255,255,255,.2) 0%, transparent 50%); }
-    .g5::after { background:radial-gradient(circle at 70% 50%, rgba(184,150,74,.3) 0%, transparent 60%); }
+    .gallery-zoom { position: absolute; top: 16px; right: 16px; width: 36px; height: 36px; background: rgba(0,0,0,.4); border: 1px solid rgba(255,255,255,.2); display: flex; align-items: center; justify-content: center; color: white; font-size: .9rem; opacity: 0; transition: opacity .3s; }
+    .gallery-item:hover .gallery-zoom { opacity: 1; }
 
     /* REVIEWS */
     #reviews { background: var(--white); padding: 120px 100px; }
     .reviews-header { text-align: center; margin-bottom: 80px; }
     .reviews-header .section-tag { justify-content: center; }
-    .reviews-header .section-tag::before { content: ""; width: 32px; height: 1px; background: var(--gold); display: inline-block; }
     .reviews-header .section-tag::before { display: none; }
     .reviews-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; background: var(--cream-dark); }
     .review-card { background: var(--white); padding: 52px 44px; }
@@ -188,8 +186,22 @@
     .footer-links a { font-size: .7rem; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.35); text-decoration: none; transition: color .3s; }
     .footer-links a:hover { color: var(--gold); }
 
-    .fade-up { opacity: 0; transform: translateY(30px); transition: opacity .7s ease, transform .7s ease; }
-    .fade-up.visible { opacity: 1; transform: none; }
+    /* LIGHTBOX */
+    .lb-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.92); z-index: 9999; display: none; align-items: center; justify-content: center; }
+    .lb-overlay.open { display: flex; }
+    .lb-inner { position: relative; max-width: 90vw; max-height: 90vh; }
+    .lb-img { max-width: 90vw; max-height: 85vh; object-fit: contain; display: block; }
+    .lb-close { position: absolute; top: -44px; right: 0; color: rgba(255,255,255,.7); font-size: 1.6rem; cursor: pointer; background: none; border: none; line-height: 1; transition: color .2s; }
+    .lb-close:hover { color: var(--gold); }
+    .lb-prev, .lb-next { position: fixed; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.15); color: rgba(255,255,255,.8); font-size: 1.4rem; width: 52px; height: 52px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background .2s, color .2s; }
+    .lb-prev { left: 24px; }
+    .lb-next { right: 24px; }
+    .lb-prev:hover, .lb-next:hover { background: rgba(184,150,74,.25); color: var(--gold); }
+    .lb-caption { text-align: center; color: rgba(255,255,255,.5); font-size: .75rem; letter-spacing: .14em; text-transform: uppercase; margin-top: 16px; }
+
+    .fade-up { opacity: 1; transform: none; transition: opacity .7s ease, transform .7s ease; }
+    .fade-up.animated { opacity: 0; transform: translateY(30px); }
+    .fade-up.animated.visible { opacity: 1; transform: none; }
 
     @media (max-width: 1100px) {
       nav, nav.scrolled { padding: 18px 40px; }
@@ -220,6 +232,7 @@
       .gallery-header .lead { text-align: left; }
       .gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
       .gallery-item:first-child { grid-row: span 1; }
+      .gallery-grid .gallery-item { height: 220px; }
       .reviews-grid { grid-template-columns: 1fr; }
       #reviews { padding: 80px 40px; }
       #contact { grid-template-columns: 1fr; }
@@ -230,6 +243,17 @@
   </style>
 </head>
 <body>
+
+  <!-- LIGHTBOX -->
+  <div class="lb-overlay" id="lightbox" onclick="lbClickOutside(event)">
+    <button class="lb-prev" onclick="lbMove(-1)">&#8592;</button>
+    <div class="lb-inner">
+      <button class="lb-close" onclick="lbClose()">&#x2715;</button>
+      <img class="lb-img" id="lb-img" src="" alt="" />
+      <div class="lb-caption" id="lb-caption"></div>
+    </div>
+    <button class="lb-next" onclick="lbMove(1)">&#8594;</button>
+  </div>
 
   <nav id="navbar">
     <a href="index.html" class="nav-logo">Penzion <span>Březiny</span></a>
@@ -286,11 +310,7 @@
       </div>
     </div>
     <div class="intro-visual">
-      <div class="intro-visual-inner">
-        <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M100 10 L130 80 L200 80 L145 125 L165 195 L100 155 L35 195 L55 125 L0 80 L70 80 Z" stroke="white" stroke-width="1" fill="none"/>
-        </svg>
-      </div>
+      <div class="intro-visual-inner"></div>
       <div class="intro-quote">
         <div class="intro-ornament"></div>
         <blockquote>„Nádherné místo na konci světa, ale s veškerým luxusem."</blockquote>
@@ -309,7 +329,7 @@
     </div>
     <div class="apt-grid">
       <div class="apt-card fade-up">
-        <div class="apt-visual">
+        <div class="apt-visual" onclick="lbOpenSet('jaguar', 0)">
           <div class="apt-jaguar-bg"></div>
           <div class="apt-visual-label">Jaguár</div>
           <div class="apt-badge-row">
@@ -317,6 +337,7 @@
             <span class="badge">Terasa</span>
             <span class="badge">Vaňová koupelna</span>
           </div>
+          <div class="apt-zoom-hint"><span>Zobrazit fotky</span></div>
         </div>
         <div class="apt-body">
           <h3 class="apt-name">Apartmán Jaguár</h3>
@@ -331,7 +352,7 @@
         </div>
       </div>
       <div class="apt-card fade-up">
-        <div class="apt-visual">
+        <div class="apt-visual" onclick="lbOpenSet('onyx', 0)">
           <div class="apt-onyx-bg"></div>
           <div class="apt-visual-label">Onyx</div>
           <div class="apt-badge-row">
@@ -339,6 +360,7 @@
             <span class="badge">Výhled do zeleně</span>
             <span class="badge">Podkroví</span>
           </div>
+          <div class="apt-zoom-hint"><span>Zobrazit fotky</span></div>
         </div>
         <div class="apt-body">
           <h3 class="apt-name">Apartmán Onyx</h3>
@@ -379,7 +401,7 @@
           <div class="wellness-icon">🌲</div>
           <div>
             <span class="wellness-icon-title">Příroda na dosah</span>
-            Lesy, louky a beskydsá krajina přímo před dveřmi vašeho apartmánu – bez příplatku a bez omezení.
+            Lesy, louky a beskydská krajina přímo před dveřmi vašeho apartmánu – bez příplatku a bez omezení.
           </div>
         </li>
       </ul>
@@ -404,25 +426,30 @@
       <p class="lead fade-up">Detaily apartmánů a krásné okolí Kateřinic.</p>
     </div>
     <div class="gallery-grid">
-      <div class="gallery-item">
+      <div class="gallery-item" onclick="lbOpenSet('gallery', 0)">
         <div class="gallery-item-inner g1"></div>
         <div class="gallery-overlay"><span class="gallery-caption">Exteriér penzionu</span></div>
+        <div class="gallery-zoom">⊕</div>
       </div>
-      <div class="gallery-item">
+      <div class="gallery-item" onclick="lbOpenSet('gallery', 1)">
         <div class="gallery-item-inner g2"></div>
         <div class="gallery-overlay"><span class="gallery-caption">Horká vana</span></div>
+        <div class="gallery-zoom">⊕</div>
       </div>
-      <div class="gallery-item">
+      <div class="gallery-item" onclick="lbOpenSet('gallery', 2)">
         <div class="gallery-item-inner g3"></div>
-        <div class="gallery-overlay"><span class="gallery-caption">Apartmán Jaguár</span></div>
+        <div class="gallery-overlay"><span class="gallery-caption">Apartmán Jaguár – koupelna</span></div>
+        <div class="gallery-zoom">⊕</div>
       </div>
-      <div class="gallery-item">
+      <div class="gallery-item" onclick="lbOpenSet('gallery', 3)">
         <div class="gallery-item-inner g4"></div>
-        <div class="gallery-overlay"><span class="gallery-caption">Apartmán Onyx</span></div>
+        <div class="gallery-overlay"><span class="gallery-caption">Apartmán Onyx – obývák</span></div>
+        <div class="gallery-zoom">⊕</div>
       </div>
-      <div class="gallery-item">
+      <div class="gallery-item" onclick="lbOpenSet('gallery', 4)">
         <div class="gallery-item-inner g5"></div>
         <div class="gallery-overlay"><span class="gallery-caption">Výhled do přírody</span></div>
+        <div class="gallery-zoom">⊕</div>
       </div>
     </div>
   </section>
@@ -492,7 +519,7 @@
           <div class="contact-item-icon">✉</div>
           <div>
             <div class="contact-item-label">E-mail</div>
-            <a href="mailto:info@zubicek.cz" class="contact-item-value">info<a href="/cdn-cgi/l/email-protection#0d64636b624d77786f646e6866236e77" class="contact-item-value"><span class="__cf_email__" data-cfemail="2d44434b426d57584f444e4846034e57">[email&#160;protected]</span></a>#64;zubicek.cz</a>
+            <a href="mailto:info@zubicek.cz" class="contact-item-value">info@zubicek.cz</a>
           </div>
         </div>
         <div class="contact-item">
@@ -510,7 +537,7 @@
         <div class="map-pin">📍</div>
         <div class="map-name">Penzion Březiny</div>
         <div class="map-addr">Kateřinice 254<br>756 21 Kateřinice<br>Česká republika</div>
-        <a href="https://maps.google.com/?q=Penzion+Breziny+Kateriniice" target="_blank" class="map-link">Otevřít v Google Maps</a>
+        <a href="https://maps.google.com/?q=Kateřinice+254,+756+21" target="_blank" class="map-link">Otevřít v Google Maps</a>
       </div>
     </div>
   </section>
@@ -525,7 +552,74 @@
   </footer>
 
   <script>
+    // Navbar
     const nav = document.getElementById('navbar');
     window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 60); });
-    const obs = new IntersectionObserver(entries => {
-      entries.f
+
+    // Fade-up
+    const fadeEls = document.querySelectorAll('.fade-up');
+    if ('IntersectionObserver' in window) {
+      fadeEls.forEach(el => el.classList.add('animated'));
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+      }, { threshold: 0.1 });
+      fadeEls.forEach(el => obs.observe(el));
+    }
+
+    // Lightbox
+    const lbSets = {
+      jaguar: [
+        { src: 'img/jaguar-obyvak.jpg', cap: 'Jaguár – Obývací pokoj' },
+        { src: 'img/jaguar-koupelna.jpg', cap: 'Jaguár – Koupelna' },
+        { src: 'img/jaguar-loznice.jpg', cap: 'Jaguár – Ložnice' },
+        { src: 'img/jaguar-kuchyne.jpg', cap: 'Jaguár – Kuchyně' },
+      ],
+      onyx: [
+        { src: 'img/onyx-obyvak.jpg', cap: 'Onyx – Obývací pokoj' },
+        { src: 'img/onyx-koupelna.jpg', cap: 'Onyx – Koupelna' },
+        { src: 'img/onyx-loznice.jpg', cap: 'Onyx – Ložnice' },
+        { src: 'img/onyx-kuchyne.jpg', cap: 'Onyx – Kuchyňka' },
+        { src: 'img/onyx-jidelna.jpg', cap: 'Onyx – Jídelna' },
+      ],
+      gallery: [
+        { src: 'img/exterior.jpg', cap: 'Exteriér penzionu' },
+        { src: 'img/vana-zapad2.jpg', cap: 'Horká vana při západu slunce' },
+        { src: 'img/jaguar-koupelna.jpg', cap: 'Apartmán Jaguár – koupelna' },
+        { src: 'img/onyx-obyvak.jpg', cap: 'Apartmán Onyx – obývák' },
+        { src: 'img/priroda-louka.jpg', cap: 'Příroda v okolí' },
+      ]
+    };
+    let curSet = [], curIdx = 0;
+
+    function lbOpenSet(setName, idx) {
+      curSet = lbSets[setName];
+      curIdx = idx;
+      lbShow();
+    }
+    function lbShow() {
+      const lb = document.getElementById('lightbox');
+      document.getElementById('lb-img').src = curSet[curIdx].src;
+      document.getElementById('lb-caption').textContent = curSet[curIdx].cap;
+      lb.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function lbClose() {
+      document.getElementById('lightbox').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    function lbMove(dir) {
+      curIdx = (curIdx + dir + curSet.length) % curSet.length;
+      lbShow();
+    }
+    function lbClickOutside(e) {
+      if (e.target === document.getElementById('lightbox')) lbClose();
+    }
+    document.addEventListener('keydown', e => {
+      if (!document.getElementById('lightbox').classList.contains('open')) return;
+      if (e.key === 'Escape') lbClose();
+      if (e.key === 'ArrowLeft') lbMove(-1);
+      if (e.key === 'ArrowRight') lbMove(1);
+    });
+  </script>
+</body>
+</html>

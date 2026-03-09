@@ -28,7 +28,6 @@
     .nav-cta { border: 1px solid var(--gold); color: var(--gold) !important; padding: 9px 22px; transition: background .3s, color .3s !important; }
     .nav-cta:hover { background: var(--gold); color: var(--forest) !important; }
 
-    /* HERO */
     .page-hero {
       position: relative; height: 55vh; min-height: 400px;
       display: flex; flex-direction: column; justify-content: flex-end;
@@ -43,12 +42,10 @@
     .page-hero p { position:relative; font-size:.95rem; font-weight:300; color:rgba(255,255,255,.6); max-width:520px; line-height:1.8; margin-top:20px; }
 
     /* CONTACT LAYOUT */
-    .contact-main {
-      display: grid; grid-template-columns: 1fr 1.4fr; min-height: 80vh;
-    }
+    .contact-main { display: grid; grid-template-columns: 1fr 1.4fr; }
     .contact-info {
-      background: var(--forest); padding: 100px 72px;
-      display: flex; flex-direction: column; gap: 48px; justify-content: center;
+      background: var(--forest); padding: 80px 72px;
+      display: flex; flex-direction: column; gap: 40px; justify-content: center;
     }
     .section-tag { font-size:.68rem; letter-spacing:.22em; text-transform:uppercase; color:var(--gold); margin-bottom:16px; display:flex; align-items:center; gap:14px; }
     .section-tag::before { content:''; width:32px; height:1px; background:var(--gold); }
@@ -56,46 +53,25 @@
     h2 em { font-style:italic; color:var(--gold-light); }
     .contact-info h2 { color: var(--white); }
     .contact-info .section-tag { color: var(--gold); }
-    .contact-info p { font-size:.92rem; font-weight:300; color:rgba(255,255,255,.6); line-height:1.8; }
+    .contact-info > p { font-size:.92rem; font-weight:300; color:rgba(255,255,255,.6); line-height:1.8; }
 
     .info-items { display:flex; flex-direction:column; gap:0; }
-    .info-item {
-      display:flex; align-items:flex-start; gap:20px;
-      padding: 24px 0; border-bottom: 1px solid rgba(255,255,255,.07);
-    }
+    .info-item { display:flex; align-items:flex-start; gap:20px; padding: 20px 0; border-bottom: 1px solid rgba(255,255,255,.07); }
     .info-item:first-child { padding-top: 0; }
     .info-item:last-child { border-bottom: none; }
-    .info-icon {
-      width:44px; height:44px; flex-shrink:0;
-      border:1px solid rgba(184,150,74,.3); display:flex; align-items:center; justify-content:center;
-      color:var(--gold); font-size:1rem;
-    }
+    .info-icon { width:44px; height:44px; flex-shrink:0; border:1px solid rgba(184,150,74,.3); display:flex; align-items:center; justify-content:center; color:var(--gold); font-size:1rem; }
     .info-label { font-size:.65rem; letter-spacing:.18em; text-transform:uppercase; color:var(--gold); margin-bottom:4px; }
-    .info-value { font-size:1rem; font-weight:300; color:var(--white); text-decoration:none; transition:color .3s; line-height:1.5; }
+    .info-value { font-size:1rem; font-weight:300; color:var(--white); text-decoration:none; transition:color .3s; line-height:1.5; display:block; }
     .info-value:hover { color:var(--gold-light); }
 
-    /* MAP STRIP */
-    .map-strip {
-      background: var(--forest-mid); height: 80px;
-      display:flex; align-items:center; justify-content:center; gap:32px;
-      border-top: 1px solid rgba(255,255,255,.06);
-    }
-    .map-strip-text { font-size:.78rem; letter-spacing:.12em; text-transform:uppercase; color:rgba(255,255,255,.5); }
-    .map-strip-link {
-      font-size:.75rem; letter-spacing:.14em; text-transform:uppercase;
-      color:var(--gold); text-decoration:none; display:flex; align-items:center; gap:8px;
-      transition:gap .3s;
-    }
-    .map-strip-link::after { content:'→'; }
-    .map-strip-link:hover { gap:14px; }
+    .map-link-row { display:flex; align-items:center; gap:10px; font-size:.78rem; letter-spacing:.14em; text-transform:uppercase; color:var(--gold); text-decoration:none; transition:gap .3s; }
+    .map-link-row::after { content:'→'; }
+    .map-link-row:hover { gap:16px; }
 
     /* FORM */
-    .contact-form-wrap {
-      background: var(--cream); padding: 80px 80px;
-      display:flex; flex-direction:column; justify-content:center;
-    }
+    .contact-form-wrap { background: var(--cream); padding: 80px 80px; display:flex; flex-direction:column; justify-content:center; }
     .form-title { font-family:'Cormorant Garamond',serif; font-size:2rem; font-weight:300; color:var(--forest); margin-bottom:8px; }
-    .form-sub { font-size:.88rem; font-weight:300; color:var(--stone); margin-bottom:48px; line-height:1.7; }
+    .form-sub { font-size:.88rem; font-weight:300; color:var(--stone); margin-bottom:40px; line-height:1.7; }
 
     .form-row { display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-bottom:20px; }
     .form-group { display:flex; flex-direction:column; gap:8px; margin-bottom:20px; }
@@ -104,15 +80,12 @@
       background:var(--white); border:1px solid var(--cream-dark);
       padding:14px 18px; font-family:'Jost',sans-serif; font-size:.9rem; font-weight:300;
       color:var(--forest); outline:none; transition:border-color .3s;
-      appearance:none; -webkit-appearance:none;
+      appearance:none; -webkit-appearance:none; width:100%;
     }
-    .form-input:focus, .form-select:focus, .form-textarea:focus {
-      border-color: var(--gold);
-    }
+    .form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--gold); }
     .form-input::placeholder, .form-textarea::placeholder { color:var(--stone); }
     .form-textarea { resize:vertical; min-height:120px; }
     .form-select { background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238a7f6e' stroke-width='1.5' fill='none'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 18px center; padding-right:44px; cursor:pointer; }
-
     .date-row { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
 
     .form-check { display:flex; align-items:flex-start; gap:12px; margin-bottom:32px; }
@@ -130,20 +103,16 @@
     .btn-submit .arrow { transition:transform .3s; }
     .btn-submit:hover .arrow { transform:translateX(6px); }
 
-    /* SUCCESS STATE */
-    .form-success {
-      display:none; flex-direction:column; align-items:center; text-align:center;
-      gap:20px; padding:60px 40px;
-    }
+    .form-success { display:none; flex-direction:column; align-items:center; text-align:center; gap:20px; padding:60px 40px; }
     .form-success.visible { display:flex; }
     .success-icon { width:64px; height:64px; border:2px solid var(--gold); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1.6rem; }
     .success-title { font-family:'Cormorant Garamond',serif; font-size:1.8rem; font-weight:300; color:var(--forest); }
     .success-text { font-size:.9rem; font-weight:300; color:var(--stone); line-height:1.75; max-width:360px; }
 
-    /* INFO CARDS BOTTOM */
-    .info-cards { background:var(--white); padding:80px 100px; display:grid; grid-template-columns:repeat(3,1fr); gap:2px; background-color:var(--white); }
-    .info-card-wrap { background:var(--cream-dark); padding:1px; }
-    .info-card { background:var(--white); padding:48px 44px; height:100%; }
+    /* INFO CARDS */
+    .info-cards-section { background: var(--white); padding: 60px 100px; }
+    .info-cards-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; background:var(--cream-dark); }
+    .info-card { background:var(--white); padding:48px 44px; }
     .info-card-icon { font-size:1.4rem; margin-bottom:16px; }
     .info-card-title { font-family:'Cormorant Garamond',serif; font-size:1.4rem; font-weight:300; color:var(--forest); margin-bottom:12px; }
     .info-card-text { font-size:.85rem; font-weight:300; color:var(--stone); line-height:1.75; }
@@ -156,8 +125,9 @@
     .footer-links a { font-size:.7rem; letter-spacing:.1em; text-transform:uppercase; color:rgba(255,255,255,.35); text-decoration:none; transition:color .3s; }
     .footer-links a:hover { color:var(--gold); }
 
-    .fade-up { opacity:0; transform:translateY(24px); transition:opacity .6s ease, transform .6s ease; }
-    .fade-up.visible { opacity:1; transform:none; }
+    .fade-up { opacity:1; transform:none; transition:opacity .6s ease, transform .6s ease; }
+    .fade-up.animated { opacity:0; transform:translateY(24px); }
+    .fade-up.animated.visible { opacity:1; transform:none; }
 
     @media (max-width:1000px) {
       nav { padding:18px 32px; } .nav-links { display:none; }
@@ -166,7 +136,8 @@
       .contact-info { padding:80px 40px; }
       .contact-form-wrap { padding:60px 40px; }
       .form-row, .date-row { grid-template-columns:1fr; }
-      .info-cards { grid-template-columns:1fr; padding:60px 40px; }
+      .info-cards-section { padding:60px 40px; }
+      .info-cards-grid { grid-template-columns:1fr; }
       footer { padding:40px 32px; }
     }
   </style>
@@ -197,7 +168,7 @@
     <div>
       <p class="section-tag">Kde nás najdete</p>
       <h2>Kontaktní <em>informace</em></h2>
-      <p style="margin-top:16px;">Zavolejte nám, napište e-mail nebo vyplňte formulář – ozveme se vám co nejdříve.</p>
+      <p style="margin-top:16px; font-size:.92rem; font-weight:300; color:rgba(255,255,255,.6); line-height:1.8;">Zavolejte nám, napište e-mail nebo vyplňte formulář – ozveme se vám co nejdříve.</p>
     </div>
     <div class="info-items">
       <div class="info-item">
@@ -211,7 +182,7 @@
         <div class="info-icon">✉</div>
         <div>
           <div class="info-label">E-mail</div>
-          <a href="mailto:info@zubicek.cz" class="contact-val">info<a href="/cdn-cgi/l/email-protection#6b02050d042b111e0902080e00450811" class="info-value"><span class="__cf_email__" data-cfemail="8de4e3ebe2cdf7f8efe4eee8e6a3eef7">[email&#160;protected]</span></a>#64;zubicek.cz</a>
+          <a href="mailto:info@zubicek.cz" class="info-value">info@zubicek.cz</a>
         </div>
       </div>
       <div class="info-item">
@@ -229,9 +200,7 @@
         </div>
       </div>
     </div>
-    <a href="https://maps.google.com/?q=Penzion+Breziny+Kateriniice" target="_blank" class="map-strip-link" style="font-size:.78rem; letter-spacing:.14em; text-transform:uppercase; color:var(--gold); text-decoration:none; display:flex; align-items:center; gap:10px;">
-      Otevřít Google Maps <span>→</span>
-    </a>
+    <a href="https://maps.google.com/?q=Kateřinice+254,+756+21" target="_blank" class="map-link-row">Otevřít Google Maps</a>
   </div>
 
   <div class="contact-form-wrap">
@@ -239,78 +208,76 @@
       <h3 class="form-title">Poptávka pobytu</h3>
       <p class="form-sub">Vyplňte formulář a my se vám ozveme do 24 hodin s dostupností a detaily.</p>
 
-      <div>
-        <div class="form-row">
-          <div class="form-group">
-            <label class="form-label" for="fname">Jméno</label>
-            <input class="form-input" type="text" id="fname" placeholder="Jan" />
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="lname">Příjmení</label>
-            <input class="form-input" type="text" id="lname" placeholder="Novák" />
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label class="form-label" for="email">E-mail</label>
-            <input class="form-input" type="email" id="email" placeholder="jan.novak@email.cz" />
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="phone">Telefon</label>
-            <input class="form-input" type="tel" id="phone" placeholder="+420 123 456 789" />
-          </div>
-        </div>
-
+      <div class="form-row">
         <div class="form-group">
-          <label class="form-label" for="apt">Apartmán</label>
-          <select class="form-select" id="apt">
-            <option value="">Vyberte apartmán...</option>
-            <option value="jaguar">Apartmán Jaguár (přízemí, až 4 osoby)</option>
-            <option value="onyx">Apartmán Onyx (patro, až 6 osob)</option>
-            <option value="both">Celá chata (oba apartmány)</option>
-            <option value="unsure">Nevím – poraďte mi</option>
-          </select>
+          <label class="form-label" for="fname">Jméno</label>
+          <input class="form-input" type="text" id="fname" placeholder="Jan" />
         </div>
-
-        <div class="date-row" style="margin-bottom:20px;">
-          <div class="form-group" style="margin-bottom:0;">
-            <label class="form-label" for="checkin">Příjezd</label>
-            <input class="form-input" type="date" id="checkin" />
-          </div>
-          <div class="form-group" style="margin-bottom:0;">
-            <label class="form-label" for="checkout">Odjezd</label>
-            <input class="form-input" type="date" id="checkout" />
-          </div>
-        </div>
-
         <div class="form-group">
-          <label class="form-label" for="guests">Počet hostů</label>
-          <select class="form-select" id="guests">
-            <option value="">Vyberte počet...</option>
-            <option value="1">1 osoba</option>
-            <option value="2">2 osoby</option>
-            <option value="3">3 osoby</option>
-            <option value="4">4 osoby</option>
-            <option value="5">5 osob</option>
-            <option value="6+">6 a více osob</option>
-          </select>
+          <label class="form-label" for="lname">Příjmení</label>
+          <input class="form-input" type="text" id="lname" placeholder="Novák" />
         </div>
-
-        <div class="form-group">
-          <label class="form-label" for="message">Zpráva / Speciální požadavky</label>
-          <textarea class="form-textarea" id="message" placeholder="Napiřte nám o svých přáních, speciálních požadavcích nebo dotazech..."></textarea>
-        </div>
-
-        <div class="form-check">
-          <input type="checkbox" id="gdpr" />
-          <label for="gdpr">Souhlasím se zpracováním osobních údajů v souladu s <a href="#">Zásadami ochrany osobních údajů</a> za účelem zodpovězení mého dotazu.</label>
-        </div>
-
-        <button class="btn-submit" id="submitBtn" onclick="submitForm()">
-          Odeslat poptávku <span class="arrow">→</span>
-        </button>
       </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label" for="email">E-mail</label>
+          <input class="form-input" type="email" id="email" placeholder="jan.novak@email.cz" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="phone">Telefon</label>
+          <input class="form-input" type="tel" id="phone" placeholder="+420 123 456 789" />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="apt">Apartmán</label>
+        <select class="form-select" id="apt">
+          <option value="">Vyberte apartmán...</option>
+          <option value="jaguar">Apartmán Jaguár (přízemí, až 4 osoby)</option>
+          <option value="onyx">Apartmán Onyx (patro, až 6 osob)</option>
+          <option value="both">Celá chata (oba apartmány)</option>
+          <option value="unsure">Nevím – poraďte mi</option>
+        </select>
+      </div>
+
+      <div class="date-row" style="margin-bottom:20px;">
+        <div class="form-group" style="margin-bottom:0;">
+          <label class="form-label" for="checkin">Příjezd</label>
+          <input class="form-input" type="date" id="checkin" />
+        </div>
+        <div class="form-group" style="margin-bottom:0;">
+          <label class="form-label" for="checkout">Odjezd</label>
+          <input class="form-input" type="date" id="checkout" />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="guests">Počet hostů</label>
+        <select class="form-select" id="guests">
+          <option value="">Vyberte počet...</option>
+          <option value="1">1 osoba</option>
+          <option value="2">2 osoby</option>
+          <option value="3">3 osoby</option>
+          <option value="4">4 osoby</option>
+          <option value="5">5 osob</option>
+          <option value="6+">6 a více osob</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="message">Zpráva / Speciální požadavky</label>
+        <textarea class="form-textarea" id="message" placeholder="Napište nám o svých přáních, speciálních požadavcích nebo dotazech..."></textarea>
+      </div>
+
+      <div class="form-check">
+        <input type="checkbox" id="gdpr" />
+        <label for="gdpr">Souhlasím se zpracováním osobních údajů v souladu s <a href="#">Zásadami ochrany osobních údajů</a> za účelem zodpovězení mého dotazu.</label>
+      </div>
+
+      <button class="btn-submit" id="submitBtn" onclick="submitForm()">
+        Odeslat poptávku <span class="arrow">→</span>
+      </button>
     </div>
 
     <div class="form-success" id="formSuccess">
@@ -323,22 +290,22 @@
 </div>
 
 <!-- INFO CARDS -->
-<div style="background:var(--white); padding:40px 100px 60px;">
-  <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:2px; background:var(--cream-dark);" class="fade-up">
-    <div style="background:var(--white); padding:48px 44px;">
-      <div style="font-size:1.4rem; margin-bottom:16px;">⚡</div>
-      <div style="font-family:'Cormorant Garamond',serif; font-size:1.4rem; font-weight:300; color:var(--forest); margin-bottom:12px;">Rychlá odpověď</div>
-      <div style="font-size:.85rem; font-weight:300; color:var(--stone); line-height:1.75;">Obvykle odpovídáme do 24 hodin. Preferujete telefon? Volejte nás kdykoliv mezi 8:00 a 20:00.</div>
+<div class="info-cards-section fade-up">
+  <div class="info-cards-grid">
+    <div class="info-card">
+      <div class="info-card-icon">⚡</div>
+      <div class="info-card-title">Rychlá odpověď</div>
+      <div class="info-card-text">Obvykle odpovídáme do 24 hodin. Preferujete telefon? Volejte nás kdykoliv mezi 8:00 a 20:00.</div>
     </div>
-    <div style="background:var(--white); padding:48px 44px;">
-      <div style="font-size:1.4rem; margin-bottom:16px;">🤝</div>
-      <div style="font-family:'Cormorant Garamond',serif; font-size:1.4rem; font-weight:300; color:var(--forest); margin-bottom:12px;">Přímá komunikace</div>
-      <div style="font-size:.85rem; font-weight:300; color:var(--stone); line-height:1.75;">Komunikujeme přímo s vámi, bez prostředníků a rezervačních systémů. Váš pobyt připravíme přesně na míru.</div>
+    <div class="info-card">
+      <div class="info-card-icon">🤝</div>
+      <div class="info-card-title">Přímá komunikace</div>
+      <div class="info-card-text">Komunikujeme přímo s vámi, bez prostředníků a rezervačních systémů. Váš pobyt připravíme přesně na míru.</div>
     </div>
-    <div style="background:var(--white); padding:48px 44px;">
-      <div style="font-size:1.4rem; margin-bottom:16px;">🧭</div>
-      <div style="font-family:'Cormorant Garamond',serif; font-size:1.4rem; font-weight:300; color:var(--forest); margin-bottom:12px;">Jak se dostat</div>
-      <div style="font-size:.85rem; font-weight:300; color:var(--stone); line-height:1.75;">Kateřinice 254, 756 21. Z Vsetína cca 10 minut autem, podrobný popis trasy poskytneme při potvrzení rezervace.</div>
+    <div class="info-card">
+      <div class="info-card-icon">🧭</div>
+      <div class="info-card-title">Jak se dostat</div>
+      <div class="info-card-text">Kateřinice 254, 756 21. Z Vsetína cca 10 minut autem, podrobný popis trasy poskytneme při potvrzení rezervace.</div>
     </div>
   </div>
 </div>
@@ -353,37 +320,39 @@
 </footer>
 
 <script>
+  // Fade-up
+  const fadeEls = document.querySelectorAll('.fade-up');
+  if ('IntersectionObserver' in window) {
+    fadeEls.forEach(el => el.classList.add('animated'));
+    const obs = new IntersectionObserver(e => e.forEach(el => {
+      if (el.isIntersecting) { el.target.classList.add('visible'); obs.unobserve(el.target); }
+    }), { threshold: .1 });
+    fadeEls.forEach(el => obs.observe(el));
+  }
+
+  // Form
   function submitForm() {
     const gdpr = document.getElementById('gdpr');
     const fname = document.getElementById('fname').value.trim();
     const email = document.getElementById('email').value.trim();
-
-    if (!fname || !email) {
-      alert('Prosím vyplňte alespoň jméno a e-mail.');
-      return;
-    }
-    if (!gdpr.checked) {
-      alert('Pro odeslání formuláře je nutný souhlas se zpracováním osobních údajů.');
-      return;
-    }
-
-    // Simulate send
+    if (!fname || !email) { alert('Prosím vyplňte alespoň jméno a e-mail.'); return; }
+    if (!gdpr.checked) { alert('Pro odeslání formuláře je nutný souhlas se zpracováním osobních údajů.'); return; }
     const btn = document.getElementById('submitBtn');
     btn.textContent = 'Odesílám...';
     btn.disabled = true;
-
     setTimeout(() => {
       document.getElementById('formContainer').style.display = 'none';
       document.getElementById('formSuccess').classList.add('visible');
     }, 1200);
   }
 
-  // Set min dates for date inputs
+  // Dates
   const today = new Date().toISOString().split('T')[0];
   document.getElementById('checkin').min = today;
   document.getElementById('checkout').min = today;
   document.getElementById('checkin').addEventListener('change', function() {
     document.getElementById('checkout').min = this.value;
   });
-
-  const obs = new Intersection
+</script>
+</body>
+</html>
