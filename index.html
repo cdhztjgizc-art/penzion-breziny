@@ -35,16 +35,16 @@
       padding: 0 60px 100px; overflow: hidden;
     }
     .hero-bg { position: absolute; inset: 0; background: url("img/hero.jpg") center center/cover no-repeat; background-color: #1e2d1f; }
-    .hero-bg::before { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,.7) 0%, rgba(0,0,0,.3) 60%, rgba(0,0,0,.15) 100%); z-index: 1; }
+    .hero-bg::before { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,.85) 0%, rgba(0,0,0,.55) 50%, rgba(0,0,0,.3) 100%); z-index: 1; }
     .hero-bg::after { content: ''; position: absolute; inset: 0; background-image: radial-gradient(ellipse 80% 50% at 70% 40%, rgba(184,150,74,.12) 0%, transparent 60%), radial-gradient(ellipse 50% 80% at 20% 70%, rgba(30,45,31,.6) 0%, transparent 60%); }
     .hero-noise { position: absolute; inset: 0; opacity: .04; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); background-size: 200px 200px; }
     .hero-line { position: absolute; top: 0; left: 60px; width: 1px; height: 100%; background: linear-gradient(to bottom, transparent, rgba(184,150,74,.4), transparent); }
-    .hero-tag { position: relative; font-size: .72rem; letter-spacing: .22em; text-transform: uppercase; color: var(--gold); margin-bottom: 28px; display: flex; align-items: center; gap: 16px; }
+    .hero-tag { position: relative; z-index: 2; font-size: .72rem; letter-spacing: .22em; text-transform: uppercase; color: var(--gold); margin-bottom: 28px; display: flex; align-items: center; gap: 16px; }
     .hero-tag::before { content: ''; width: 40px; height: 1px; background: var(--gold); }
-    h1 { text-shadow: 0 2px 20px rgba(0,0,0,.5); position: relative; font-family: 'Cormorant Garamond', serif; font-size: clamp(3.5rem, 7vw, 7rem); font-weight: 300; line-height: 1; color: var(--white); letter-spacing: -.01em; max-width: 700px; margin-bottom: 32px; }
+    h1 { text-shadow: 0 2px 24px rgba(0,0,0,.8); position: relative; z-index: 2; font-family: 'Cormorant Garamond', serif; font-size: clamp(3.5rem, 7vw, 7rem); font-weight: 300; line-height: 1; color: var(--white); letter-spacing: -.01em; max-width: 700px; margin-bottom: 32px; }
     h1 em { font-style: italic; color: var(--gold-light); }
-    .hero-sub { text-shadow: 0 1px 8px rgba(0,0,0,.6); position: relative; font-size: 1rem; font-weight: 300; color: rgba(255,255,255,.7); max-width: 480px; line-height: 1.75; margin-bottom: 48px; }
-    .hero-btns { position: relative; display: flex; gap: 20px; flex-wrap: wrap; }
+    .hero-sub { text-shadow: 0 1px 10px rgba(0,0,0,.8); position: relative; z-index: 2; font-size: 1rem; font-weight: 300; color: rgba(255,255,255,.9); max-width: 480px; line-height: 1.75; margin-bottom: 48px; }
+    .hero-btns { position: relative; z-index: 2; display: flex; gap: 20px; flex-wrap: wrap; }
     .btn-primary { background: var(--gold); color: var(--forest); text-decoration: none; padding: 16px 40px; font-size: .8rem; letter-spacing: .14em; text-transform: uppercase; font-weight: 500; transition: background .3s, transform .2s; display: inline-block; }
     .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
     .btn-outline { border: 1px solid rgba(255,255,255,.4); color: var(--white); text-decoration: none; padding: 16px 40px; font-size: .8rem; letter-spacing: .14em; text-transform: uppercase; font-weight: 400; transition: border-color .3s, background .3s; display: inline-block; }
@@ -305,7 +305,7 @@
         </div>
         <div class="stat">
           <div class="stat-num">∞</div>
-          <div class="stat-label">Metrů lesa před dveřmi</div>
+          <div class="stat-label">Přírody kolem</div>
         </div>
       </div>
     </div>
@@ -313,7 +313,7 @@
       <div class="intro-visual-inner"></div>
       <div class="intro-quote">
         <div class="intro-ornament"></div>
-        <blockquote>„Nádherné místo na konci světa, ale s veškerým luxusem."</blockquote>
+        <blockquote>„Nádherné místo v srdci Kateřinic, ale s veškerým luxusem."</blockquote>
         <cite>Jana K. · Ověřená recenze</cite>
       </div>
     </div>
@@ -388,13 +388,6 @@
           <div>
             <span class="wellness-icon-title">Horká vana pod hvězdami</span>
             Ponořte se do horké vody a nechte starosti všedních dní rozplynout nad korunami stromů. Výhradně pro hosty penzionu.
-          </div>
-        </li>
-        <li>
-          <div class="wellness-icon">🧖</div>
-          <div>
-            <span class="wellness-icon-title">Privátní sauna</span>
-            Prohřejte se v sauně a vychutnejte si dokonalé soukromí. Žádné časové limity, žádní cizí lidé.
           </div>
         </li>
         <li>
@@ -519,7 +512,7 @@
           <div class="contact-item-icon">✉</div>
           <div>
             <div class="contact-item-label">E-mail</div>
-            <a href="mailto:info@zubicek.cz" class="contact-item-value">info@zubicek.cz</a>
+            <a href="/cdn-cgi/l/email-protection#b2dbdcd4ddf2c8c7d0dbd1d7d99cd1c8" class="contact-item-value"><span class="__cf_email__" data-cfemail="4821262e2708323d2a212b2d23662b32">[email&#160;protected]</span></a>
           </div>
         </div>
         <div class="contact-item">
@@ -551,7 +544,7 @@
     </div>
   </footer>
 
-  <script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
     // Navbar
     const nav = document.getElementById('navbar');
     window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 60); });
@@ -615,11 +608,4 @@
       if (e.target === document.getElementById('lightbox')) lbClose();
     }
     document.addEventListener('keydown', e => {
-      if (!document.getElementById('lightbox').classList.contains('open')) return;
-      if (e.key === 'Escape') lbClose();
-      if (e.key === 'ArrowLeft') lbMove(-1);
-      if (e.key === 'ArrowRight') lbMove(1);
-    });
-  </script>
-</body>
-</html>
+      if (!docu

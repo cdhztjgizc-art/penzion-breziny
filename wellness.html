@@ -155,8 +155,9 @@
     .footer-links a { font-size: .7rem; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.35); text-decoration: none; transition: color .3s; }
     .footer-links a:hover { color: var(--gold); }
 
-    .fade-up { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
-    .fade-up.visible { opacity: 1; transform: none; }
+    .fade-up { opacity: 1; transform: none; transition: opacity .6s ease, transform .6s ease; }
+    .fade-up.animated { opacity: 0; transform: translateY(24px); }
+    .fade-up.animated.visible { opacity: 1; transform: none; }
 
     @media (max-width: 1000px) {
       nav { padding: 18px 32px; } .nav-links { display: none; }
@@ -256,54 +257,8 @@
   </div>
 </div>
 
-<!-- SAUNA -->
-<div class="wellness-section" style="flex-direction:row-reverse;">
-  <div class="w-text light fade-up" style="order:1;">
-    <p class="section-tag">Sauna</p>
-    <h2>Privátní <em>sauna</em></h2>
-    <p style="font-size:.95rem; font-weight:300; color:var(--stone); line-height:1.85;">Klasická finská sauna dostupná pouze pro hosty penzionu. Prohřejte tělo i mysl v klidném prostředí, bez časového omezení a bez sdílení s cizími lidmi.</p>
-    <div class="w-details">
-      <div class="w-detail-item light-bg">
-        <div class="w-detail-icon">🌿</div>
-        <div>
-          <div class="w-detail-title">Finská sauna</div>
-          <div class="w-detail-desc">Tradiční suchá sauna s možností parní vlhkosti – přesně jak má být</div>
-        </div>
-      </div>
-      <div class="w-detail-item light-bg">
-        <div class="w-detail-icon">⏰</div>
-        <div>
-          <div class="w-detail-title">Váš vlastní čas</div>
-          <div class="w-detail-desc">Saunu si rezervujete jen pro sebe – žádné fronty, žádné omezení délky</div>
-        </div>
-      </div>
-      <div class="w-detail-item light-bg">
-        <div class="w-detail-icon">🧴</div>
-        <div>
-          <div class="w-detail-title">Příslušenství</div>
-          <div class="w-detail-desc">Ručníky, osušky a vše potřebné pro pohodlné saunování zajišťujeme my</div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="w-visual" style="order:2;">
-    <div class="w-visual-inner wv2"></div>
-    <div class="w-visual-label">
-      <div class="w-visual-num">02</div>
-      <div class="w-visual-name">Privátní sauna</div>
-    </div>
-  </div>
-</div>
-
 <!-- OKOLÍ -->
 <div class="wellness-section">
-  <div class="w-visual">
-    <div class="w-visual-inner wv3"></div>
-    <div class="w-visual-label">
-      <div class="w-visual-num">03</div>
-      <div class="w-visual-name">Příroda Beskyd</div>
-    </div>
-  </div>
   <div class="w-text dark fade-up">
     <p class="section-tag">Příroda</p>
     <h2>Beskydy <em>za dveřmi</em></h2>
@@ -330,6 +285,13 @@
           <div class="w-detail-desc">Ranní káva s panoramatem valašských kopců – dokonalý začátek každého dne</div>
         </div>
       </div>
+    </div>
+  </div>
+  <div class="w-visual">
+    <div class="w-visual-inner wv3"></div>
+    <div class="w-visual-label">
+      <div class="w-visual-num">02</div>
+      <div class="w-visual-name">Příroda Beskyd</div>
     </div>
   </div>
 </div>
@@ -387,8 +349,14 @@
 </footer>
 
 <script>
-  const obs = new IntersectionObserver(e => e.forEach(el => { if(el.isIntersecting){el.target.classList.add('visible');obs.unobserve(el.target);} }), {threshold:.1});
-  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+  const fadeEls = document.querySelectorAll('.fade-up');
+  if ('IntersectionObserver' in window) {
+    fadeEls.forEach(el => el.classList.add('animated'));
+    const obs = new IntersectionObserver(e => e.forEach(el => {
+      if (el.isIntersecting) { el.target.classList.add('visible'); obs.unobserve(el.target); }
+    }), { threshold: .1 });
+    fadeEls.forEach(el => obs.observe(el));
+  }
 </script>
 </body>
 </html>
