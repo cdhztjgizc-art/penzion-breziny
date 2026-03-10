@@ -608,4 +608,11 @@
       if (e.target === document.getElementById('lightbox')) lbClose();
     }
     document.addEventListener('keydown', e => {
-      if (!docu
+      if (!document.getElementById('lightbox').classList.contains('open')) return;
+      if (e.key === 'Escape') lbClose();
+      if (e.key === 'ArrowLeft') lbMove(-1);
+      if (e.key === 'ArrowRight') lbMove(1);
+    });
+  </script>
+</body>
+</html>
