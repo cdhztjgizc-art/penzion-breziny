@@ -80,16 +80,16 @@
     .apartments-header .lead { text-align: right; max-width: 320px; }
     .apt-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; background: var(--cream-dark); margin: 0 100px; }
     .apt-card { background: var(--white); overflow: hidden; }
-    .apt-visual { height: 360px; position: relative; overflow: hidden; cursor: pointer; }
+    .apt-visual { height: 360px; position: relative; overflow: hidden; cursor: pointer; isolation: isolate; }
     .apt-visual:hover .apt-zoom-hint { opacity: 1; }
-    .apt-zoom-hint { position: absolute; inset: 0; background: rgba(0,0,0,.25); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity .3s; z-index: 2; }
+    .apt-zoom-hint { position: absolute; inset: 0; background: rgba(0,0,0,.25); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity .3s; z-index: 3; pointer-events: none; }
     .apt-zoom-hint span { color: var(--white); font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; border: 1px solid rgba(255,255,255,.5); padding: 10px 22px; }
-    .apt-jaguar-bg { position: absolute; inset: 0; background: url("img/jaguar-obyvak.jpg") center center/cover no-repeat; transition: transform .6s ease; }
-    .apt-onyx-bg { position: absolute; inset: 0; background: url("img/onyx-koupelna.jpg") center center/cover no-repeat; transition: transform .6s ease; }
+    .apt-jaguar-bg { position: absolute; inset: 0; background: url("img/jaguar-obyvak.jpg") center center/cover no-repeat; transition: transform .6s ease; z-index: 0; }
+    .apt-onyx-bg { position: absolute; inset: 0; background: url("img/onyx-koupelna.jpg") center center/cover no-repeat; transition: transform .6s ease; z-index: 0; }
     .apt-visual:hover .apt-jaguar-bg,
     .apt-visual:hover .apt-onyx-bg { transform: scale(1.04); }
-    .apt-visual-label { position: absolute; top: 32px; left: 36px; font-family: 'Cormorant Garamond', serif; font-size: 4rem; font-weight: 300; color: rgba(255,255,255,.12); letter-spacing: -.02em; line-height: 1; z-index: 1; }
-    .apt-badge-row { position: absolute; bottom: 24px; left: 36px; display: flex; gap: 8px; flex-wrap: wrap; z-index: 1; }
+    .apt-visual-label { position: absolute; top: 32px; left: 36px; font-family: 'Cormorant Garamond', serif; font-size: 4rem; font-weight: 300; color: rgba(255,255,255,.12); letter-spacing: -.02em; line-height: 1; z-index: 1; pointer-events: none; }
+    .apt-badge-row { position: absolute; bottom: 24px; left: 36px; display: flex; gap: 8px; flex-wrap: wrap; z-index: 2; pointer-events: none; }
     .badge { background: rgba(255,255,255,.1); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,.15); color: rgba(255,255,255,.85); font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; padding: 6px 14px; }
     .apt-body { padding: 48px 48px 56px; }
     .apt-name { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 300; color: var(--forest); margin-bottom: 16px; }
@@ -483,7 +483,7 @@
         <div class="review-stars">
           <div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div>
         </div>
-        <p class="review-text">„Romantický pobyt k narozeninám – dokonalý. Krásný výhled z Onyx apartmánu, útulná atmosféra a skvělá sauna. Přesně to, co jsme hledali."</p>
+        <p class="review-text">„Romantický pobyt k narozeninám – dokonalý. Krásný výhled z Onyx apartmánu, útulná atmosféra a horká vana pod hvězdami. Přesně to, co jsme hledali."</p>
         <div class="review-author">
           <div class="review-avatar">L</div>
           <div>
