@@ -21,24 +21,24 @@ if ('IntersectionObserver' in window && fadeEls.length) {
 // Lightbox
 var lbSets = {
   jaguar: [
-    { src: 'img/jaguar-obyvak.jpg', cap: 'Jaguár – Obývací pokoj' },
-    { src: 'img/jaguar-koupelna.jpg', cap: 'Jaguár – Koupelna' },
-    { src: 'img/jaguar-loznice.jpg', cap: 'Jaguár – Ložnice' },
-    { src: 'img/jaguar-kuchyne.jpg', cap: 'Jaguár – Kuchyně' }
+    { src: 'img/jaguar-obyvak.jpg',         cap: 'Jaguár – Obývací pokoj' },
+    { src: 'img/jaguar-loznice.jpg',         cap: 'Jaguár – Ložnice' },
+    { src: 'img/jaguar-koupelna.jpg',        cap: 'Jaguár – Koupelna' },
+    { src: 'img/jaguar-koupelna-sprcha.jpg', cap: 'Jaguár – Sprchový kout' }
   ],
   onyx: [
-    { src: 'img/onyx-obyvak.jpg', cap: 'Onyx – Obývací pokoj' },
-    { src: 'img/onyx-koupelna.jpg', cap: 'Onyx – Koupelna' },
-    { src: 'img/onyx-loznice.jpg', cap: 'Onyx – Ložnice' },
-    { src: 'img/onyx-kuchyne.jpg', cap: 'Onyx – Kuchyňka' },
-    { src: 'img/onyx-jidelna.jpg', cap: 'Onyx – Jídelna' }
+    { src: 'img/onyx-obyvak.jpg',           cap: 'Onyx – Obývací pokoj' },
+    { src: 'img/onyx-kuchyne.jpg',          cap: 'Onyx – Kuchyně' },
+    { src: 'img/onyx-loznice.jpg',          cap: 'Onyx – Ložnice' },
+    { src: 'img/onyx-koupelna.jpg',         cap: 'Onyx – Koupelna' },
+    { src: 'img/onyx-koupelna-sprcha.jpg',  cap: 'Onyx – Sprchový kout' }
   ],
   gallery: [
-    { src: 'img/exterior.jpg', cap: 'Exteriér penzionu' },
-    { src: 'img/vana-zapad.jpg', cap: 'Horká vana' },
-    { src: 'img/jaguar-koupelna.jpg', cap: 'Apartmán Jaguár – koupelna' },
-    { src: 'img/onyx-obyvak.jpg', cap: 'Apartmán Onyx – obývák' },
-    { src: 'img/priroda-louka.jpg', cap: 'Příroda v okolí' }
+    { src: 'img/exterior.jpg',              cap: 'Exteriér penzionu' },
+    { src: 'img/vana-zapad.jpg',            cap: 'Horká vana' },
+    { src: 'img/jaguar-koupelna.jpg',       cap: 'Apartmán Jaguár – koupelna' },
+    { src: 'img/onyx-obyvak.jpg',           cap: 'Apartmán Onyx – obývací pokoj' },
+    { src: 'img/priroda-louka.jpg',         cap: 'Příroda v okolí' }
   ]
 };
 

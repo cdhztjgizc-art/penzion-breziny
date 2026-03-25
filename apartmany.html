@@ -90,14 +90,14 @@
     .apt-gallery-thumb:hover .apt-gallery-zoom span { opacity: 1; }
 
     .g-jaguar-1 { background-image: url("img/jaguar-obyvak.jpg"); }
-    .g-jaguar-2 { background-image: url("img/jaguar-koupelna.jpg"); }
-    .g-jaguar-3 { background-image: url("img/jaguar-loznice.jpg"); }
-    .g-jaguar-4 { background-image: url("img/jaguar-kuchyne.jpg"); }
+    .g-jaguar-2 { background-image: url("img/jaguar-loznice.jpg"); }
+    .g-jaguar-3 { background-image: url("img/jaguar-koupelna.jpg"); }
+    .g-jaguar-4 { background-image: url("img/jaguar-koupelna-sprcha.jpg"); }
     .g-onyx-1 { background-image: url("img/onyx-obyvak.jpg"); }
-    .g-onyx-2 { background-image: url("img/onyx-koupelna.jpg"); }
+    .g-onyx-2 { background-image: url("img/onyx-kuchyne.jpg"); }
     .g-onyx-3 { background-image: url("img/onyx-loznice.jpg"); }
-    .g-onyx-4 { background-image: url("img/onyx-kuchyne.jpg"); }
-    .g-onyx-5 { background-image: url("img/onyx-jidelna.jpg"); }
+    .g-onyx-4 { background-image: url("img/onyx-koupelna.jpg"); }
+    .g-onyx-5 { background-image: url("img/onyx-koupelna-sprcha.jpg"); }
 
     .apt-name { font-family: 'Cormorant Garamond', serif; font-size: 2.6rem; font-weight: 300; color: var(--forest); margin-bottom: 8px; line-height: 1.1; }
     .apt-sub { font-size: .75rem; letter-spacing: .16em; text-transform: uppercase; color: var(--gold); margin-bottom: 24px; }
@@ -444,17 +444,17 @@
   // Lightbox
   const lbSets = {
     jaguar: [
-      { src: 'img/jaguar-obyvak.jpg', cap: 'Jaguár – Obývací pokoj' },
+      { src: 'img/jaguar-obyvak.jpg',   cap: 'Jaguár – Obývací pokoj' },
+      { src: 'img/jaguar-loznice.jpg',  cap: 'Jaguár – Ložnice' },
       { src: 'img/jaguar-koupelna.jpg', cap: 'Jaguár – Koupelna' },
-      { src: 'img/jaguar-loznice.jpg', cap: 'Jaguár – Ložnice' },
-      { src: 'img/jaguar-kuchyne.jpg', cap: 'Jaguár – Kuchyně' },
+      { src: 'img/jaguar-koupelna-sprcha.jpg',   cap: 'Jaguár – Sprchový kout' },
     ],
     onyx: [
-      { src: 'img/onyx-obyvak.jpg', cap: 'Onyx – Obývací pokoj' },
+      { src: 'img/onyx-obyvak.jpg',   cap: 'Onyx – Obývací pokoj' },
+      { src: 'img/onyx-kuchyne.jpg',  cap: 'Onyx – Kuchyně' },
+      { src: 'img/onyx-loznice.jpg',  cap: 'Onyx – Ložnice' },
       { src: 'img/onyx-koupelna.jpg', cap: 'Onyx – Koupelna' },
-      { src: 'img/onyx-loznice.jpg', cap: 'Onyx – Ložnice' },
-      { src: 'img/onyx-kuchyne.jpg', cap: 'Onyx – Kuchyňka' },
-      { src: 'img/onyx-jidelna.jpg', cap: 'Onyx – Jídelna' },
+      { src: 'img/onyx-koupelna-sprcha.jpg',   cap: 'Onyx – Sprchový kout' },
     ]
   };
   let curSet = [], curIdx = 0;
