@@ -322,7 +322,8 @@
   </div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+
+<script>
   // Fade-up
   const fadeEls = document.querySelectorAll('.fade-up');
   if ('IntersectionObserver' in window) {
@@ -341,12 +342,12 @@
     if (!fname || !email) { alert('Prosím vyplňte alespoň jméno a e-mail.'); return; }
     if (!gdpr.checked) { alert('Pro odeslání formuláře je nutný souhlas se zpracováním osobních údajů.'); return; }
 
+    const honeypot = document.querySelector('input[name="_gotcha"]');
+    if (honeypot && honeypot.value) return;
+
     const btn = document.getElementById('submitBtn');
     btn.textContent = 'Odesílám...';
     btn.disabled = true;
-
-    const honeypot = document.querySelector('input[name="_gotcha"]');
-    if (honeypot && honeypot.value) return; // bot detected
 
     const data = {
       jmeno: fname + ' ' + document.getElementById('lname').value.trim(),
@@ -381,6 +382,14 @@
     });
   }
 
-  // Dates
+  // Dates - min dnes
   const today = new Date().toISOString().split('T')[0];
-  document.getElementById('checki
+  document.getElementById('checkin').min = today;
+  document.getElementById('checkout').min = today;
+  document.getElementById('checkin').addEventListener('change', function() {
+    document.getElementById('checkout').min = this.value;
+  });
+</script>
+
+</body>
+</html>
